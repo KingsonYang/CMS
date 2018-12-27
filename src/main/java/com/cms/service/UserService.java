@@ -5,6 +5,9 @@ import com.cms.dao.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
+import java.util.Map;
+
 /**
  * @Author:yqs
  * @Date: 2018/12/27
@@ -16,7 +19,7 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public User selectAll(){
+    public Map<User,String> selectAll(){
         return userMapper.selectAll();
     }
 
@@ -24,5 +27,12 @@ public class UserService {
         return userMapper.selectById(id);
     }
 
+    public User login(String userName, String passWord) {
+        return userMapper.login(userName,passWord);
+    }
+
+    public int register(User user) {
+        return userMapper.register(user);
+    }
 
 }

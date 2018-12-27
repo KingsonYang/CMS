@@ -9,11 +9,18 @@
         <result column="realName" jdbcType="VARCHAR" property="realName" />
     </resultMap>
 
-    <select id="selectAll" resultType="com.cms.entity.User">
-        select * from user where id = #{id}
+    <select id="selectAll" resultType="Map">
+        select * from user
     </select>
     <select id="selectById" resultType="com.cms.entity.User">
         select * from user where id = #{id}
     </select>
+    <select id="login" resultType="User">
+        SELECT * FROM user where userName = #{param1} and passWord = #{param2}
+    </select>
+
+    <insert id="register" parameterType="User">
+        INSERT INTO user (userName, passWord) VALUES (#{userName}, #{passWord})
+    </insert>
 
 </mapper>
