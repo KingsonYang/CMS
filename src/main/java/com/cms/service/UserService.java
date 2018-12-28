@@ -2,6 +2,7 @@ package com.cms.service;
 
 import com.cms.entity.User;
 import com.cms.dao.UserMapper;
+import com.cms.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,10 +29,12 @@ public class UserService {
     }
 
     public User login(String userName, String passWord) {
-        return userMapper.login(userName,passWord);
+
+        return userMapper.login(userName,MD5Util.getMD5(passWord.getBytes()));
     }
 
     public int register(User user) {
+        user.setPassWord(MD5Util.getMD5(user.getPassWord().getBytes()));
         return userMapper.register(user);
     }
 

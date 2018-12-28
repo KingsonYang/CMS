@@ -35,7 +35,7 @@ public class LoginController {
     @RequestMapping("/loginUser")
     public String login(User user, HttpServletRequest request){
         String userName = user.getUserName();
-        String passWord = MD5Util.getMD5(user.getPassWord().getBytes());
+        String passWord = user.getPassWord();
         User u1 =userService.login(userName,passWord);
         if (u1==null){
             return "用户名或密码错误";
