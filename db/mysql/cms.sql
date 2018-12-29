@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 29/12/2018 12:18:27
+ Date: 29/12/2018 12:41:23
 */
 
 SET NAMES utf8mb4;
@@ -35,7 +35,7 @@ CREATE TABLE `class_info`  (
 -- ----------------------------
 -- Records of class_info
 -- ----------------------------
-INSERT INTO `class_info` VALUES (1, '苏州科技大学', '计算机系', '软件', '18软件1', '2018-09-01 12:00:00', '2018-09-01 12:00:00');
+INSERT INTO `class_info` VALUES (1, '苏州科技大学', '计算机系', '软件专业', '18软件1', '2018-12-29 12:39:38', '2018-12-29 12:39:41');
 
 -- ----------------------------
 -- Table structure for classroom_info
@@ -46,7 +46,7 @@ CREATE TABLE `classroom_info`  (
   `Floor_No` int(11) NULL DEFAULT NULL,
   `Room_No` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci COMMENT = '学校楼层教室表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学校楼层教室表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of classroom_info
@@ -59,7 +59,7 @@ INSERT INTO `classroom_info` VALUES (1, 1, 101);
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE `course`  (
   `ID` int(11) NOT NULL,
-  `Name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `Course_Info_ID` int(11) NULL DEFAULT NULL,
   `Teacher_ID` int(10) NULL DEFAULT NULL,
   `Class_ID` int(11) NULL DEFAULT NULL,
   `Classroom_ID` int(11) NULL DEFAULT NULL,
@@ -70,15 +70,33 @@ CREATE TABLE `course`  (
   INDEX `授课教师`(`Teacher_ID`) USING BTREE,
   INDEX `班级`(`Class_ID`) USING BTREE,
   INDEX `教室`(`Classroom_ID`) USING BTREE,
+  INDEX `课程`(`Course_Info_ID`) USING BTREE,
   CONSTRAINT `授课教师` FOREIGN KEY (`Teacher_ID`) REFERENCES `user` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `教室` FOREIGN KEY (`Classroom_ID`) REFERENCES `classroom_info` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `班级` FOREIGN KEY (`Class_ID`) REFERENCES `class_info` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `班级` FOREIGN KEY (`Class_ID`) REFERENCES `class_info` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `课程` FOREIGN KEY (`Course_Info_ID`) REFERENCES `course_info` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '课程表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
-INSERT INTO `course` VALUES (1, 'Java基础课', 180101, 1, 1, 11, '2018-09-17 00:00:26', '2018-12-30 12:00:00');
+INSERT INTO `course` VALUES (1, 1, 180101, 1, 1, 11, '2018-12-01 12:41:04', '2019-01-31 12:41:08');
+
+-- ----------------------------
+-- Table structure for course_info
+-- ----------------------------
+DROP TABLE IF EXISTS `course_info`;
+CREATE TABLE `course_info`  (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `Dec` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`ID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of course_info
+-- ----------------------------
+INSERT INTO `course_info` VALUES (1, 'Java基础', '从入门到放弃');
 
 -- ----------------------------
 -- Table structure for role
@@ -112,7 +130,12 @@ CREATE TABLE `student`  (
   INDEX `学生所属班级`(`Class_ID`) USING BTREE,
   CONSTRAINT `学生` FOREIGN KEY (`Stu_ID`) REFERENCES `user` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `学生所属班级` FOREIGN KEY (`Class_ID`) REFERENCES `class_info` (`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci COMMENT = '学生表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '学生表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+INSERT INTO `student` VALUES (1, 20180101, 1);
 
 -- ----------------------------
 -- Table structure for user
