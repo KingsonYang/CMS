@@ -2,25 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cms.dao.UserMapper">
 
-    <resultMap id="BaseResultMap" type="com.cms.entity.User">
-        <result column="id" jdbcType="INTEGER" property="id" />
-        <result column="userName" jdbcType="VARCHAR" property="userName" />
-        <result column="passWord" jdbcType="VARCHAR" property="passWord" />
-        <result column="realName" jdbcType="VARCHAR" property="realName" />
-    </resultMap>
+  <resultMap id="BaseResultMap" type="com.cms.entity.User">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="Sex" jdbcType="CHAR" property="sex" />
+    <result column="Age" jdbcType="INTEGER" property="age" />
+    <result column="PhoneNo" jdbcType="VARCHAR" property="phoneno" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="Role_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="Create_Time" jdbcType="VARCHAR" property="createTime" />
+    <result column="Update_Time" jdbcType="VARCHAR" property="updateTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cms.entity.User">
 
-    <select id="selectAll" resultType="Map">
-        select * from user
-    </select>
-    <select id="selectById" resultType="com.cms.entity.User">
-        select * from user where id = #{id}
-    </select>
-    <select id="login" resultType="User">
-        SELECT * FROM user where userName = #{param1} and passWord = #{param2}
-    </select>
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (`Name`, `Password`, Sex, 
+      Age, PhoneNo, Email, 
+      Role_ID, Create_Time, Update_Time
+      )
+    values (#{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{age,jdbcType=INTEGER}, #{phoneno,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=INTEGER}, #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.cms.entity.User">
 
-    <insert id="register" parameterType="User">
-        INSERT INTO user (userName, passWord) VALUES (#{userName}, #{passWord})
-    </insert>
+    update user
+    set `Name` = #{name,jdbcType=VARCHAR},
+      `Password` = #{password,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=CHAR},
+      Age = #{age,jdbcType=INTEGER},
+      PhoneNo = #{phoneno,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Role_ID = #{roleId,jdbcType=INTEGER},
+      Create_Time = #{createTime,jdbcType=VARCHAR},
+      Update_Time = #{updateTime,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+    select ID, `Name`, `Password`, Sex, Age, PhoneNo, Email, Role_ID, Create_Time, Update_Time
+    from user
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+
+    select ID, `Name`, `Password`, Sex, Age, PhoneNo, Email, Role_ID, Create_Time, Update_Time
+    from user
+  </select>
+  <select id="login" resultMap="BaseResultMap">
+    SELECT * FROM user where Name = #{param1} and Password = #{param2}
+  </select>
+
 
 </mapper>

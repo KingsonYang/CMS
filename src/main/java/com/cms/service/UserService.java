@@ -6,8 +6,7 @@ import com.cms.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
-import java.util.Map;
+import java.util.List;
 
 /**
  * @Author:yqs
@@ -20,22 +19,21 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
-    public Map<User,String> selectAll(){
+    public List<User> selectAll(){
         return userMapper.selectAll();
     }
 
     public User selectById(int id){
-        return userMapper.selectById(id);
+        return userMapper.selectByPrimaryKey(id);
     }
 
     public User login(String userName, String passWord) {
-
         return userMapper.login(userName,MD5Util.getMD5(passWord.getBytes()));
     }
 
     public int register(User user) {
-        user.setPassWord(MD5Util.getMD5(user.getPassWord().getBytes()));
-        return userMapper.register(user);
+        user.setPassword(MD5Util.getMD5(user.getPassword().getBytes()));
+        return userMapper.insert(user);
     }
 
 }
