@@ -60,6 +60,9 @@
   <select id="login" resultMap="BaseResultMap">
     SELECT * FROM user where Name = #{param1} and Password = #{param2}
   </select>
+  <select id="checkByName" resultMap="BaseResultMap">
+    SELECT * FROM user where Name = #{param1}
+  </select>
 
 
 </mapper>

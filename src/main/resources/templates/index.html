@@ -2,16 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Title</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
 </head>
 <body>
 <!--<link rel="stylesheet" href="test.css" type="text/css" />-->
 <form action="/index/Login" method="post">
-    请输入用户名--：<input type="text" name="Name" id="Name"/><br>
+    请输入用户名--：<input type="text" name="Name" id="Name"/><span></span><br>
     请你输入密码--：<input type="password" name="Password" id="Password"/><br>
     <input type="submit" value="Login"/>
     <a href="/index/Register">--注册--</a>
 </form>
-
+<script th:inline="javascript">
+22         $(function(){
+23             $.ajax({
+24                 url:"/index/check",
+25                 data:{
+26                     name:"Name"
+27                 },
+28                 type:"get",
+29                 dataType:"text",
+30                 success:function(text){
+31                     alert(text);
+32                     $("span").text(text);
+33                 }
+34             });
+35         });
+36     </script>
 </body>
 </html>

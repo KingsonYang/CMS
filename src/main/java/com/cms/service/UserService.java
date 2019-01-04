@@ -27,6 +27,10 @@ public class UserService {
         return userMapper.selectByPrimaryKey(id);
     }
 
+    public User checkName(String username){
+        return userMapper.checkByName(username);
+    }
+
     public User login(String userName, String passWord) {
         return userMapper.login(userName,MD5Util.getMD5(passWord.getBytes()));
     }

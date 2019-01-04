@@ -24,7 +24,8 @@ public class SessionInterceptor implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         List list = new ArrayList();
         list.add("/index/**");
-        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns(list);
+//        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns(list);
+        registry.addInterceptor(new UserInterceptor()).excludePathPatterns("/**");
 
     }
 }
