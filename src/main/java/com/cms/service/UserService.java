@@ -14,7 +14,7 @@ import java.util.List;
  * @Time: 20:45
  */
 @Service
-public class UserService {
+public class UserService{
 
     @Autowired
     UserMapper userMapper;
@@ -27,8 +27,8 @@ public class UserService {
         return userMapper.selectByPrimaryKey(id);
     }
 
-    public User checkName(String username){
-        return userMapper.checkByName(username);
+    public boolean checkName(String username){
+        return userMapper.checkByName(username) != null ? true : false;
     }
 
     public User login(String userName, String passWord) {
