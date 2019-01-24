@@ -28,10 +28,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    //跳转首页（登录页）
     @RequestMapping("")
     public String show(){
-        return "test";
+        return "login";
     }
 
     @RequestMapping("/cms")
@@ -52,12 +51,18 @@ public class LoginController {
         }
     }
 
-    //登录操作
+    /**
+     * 登陆管理系统
+     * @param user
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @ResponseBody
     @RequestMapping("/Login")
     public MsgUtil login(User user, HttpServletRequest request) throws IOException {
         User u1 =userService.login(user.getName(),user.getPassword());
-        if (u1==null) {
+        if (u1!=null) {
             request.getSession().setAttribute("session_user",user);//登录成功后将用户放入session中，用于拦截
             return MsgUtil.success();
         } else {
@@ -65,13 +70,21 @@ public class LoginController {
         }
     }
 
-    //跳转注册页
+    /**
+     * 跳转注册页面
+     * @return
+     */
     @RequestMapping("/Register")
     public String toRegister(){
         return "register";
     }
 
-    //注册操作
+    /**
+     * 添加用户
+     * @param name
+     * @param password
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/register")
     public MsgUtil Register(String name,String password) {
@@ -107,13 +120,22 @@ public class LoginController {
     }
 
 
-    //测试未登陆拦截页面
+    /**
+     * 跳转管理系统主页
+     * @return
+     */
     @RequestMapping("/welcome")
     public String welcome(){
             return "welcome";
     }
 
-    //退出登录
+    /**
+     * 退出登录
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
     @RequestMapping("/SignOut")
     public String outUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().removeAttribute("session_user");

@@ -5,6 +5,7 @@ import com.cms.dao.UserMapper;
 import com.cms.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class UserService{
         return userMapper.login(userName,MD5Util.getMD5(passWord.getBytes()));
     }
 
+    @Transactional
     public int register(User user) {
         user.setPassword(MD5Util.getMD5(user.getPassword().getBytes()));
         return userMapper.insert(user);

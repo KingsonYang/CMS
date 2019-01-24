@@ -18,7 +18,7 @@ public class MsgUtil {
     }
 
     public static MsgUtil add(String str, Map<String, Object> map){
-        msgUtil.setCode(202);
+        msgUtil.setCode(404);
         msgUtil.setMsg(map);
         return msgUtil;
     }
