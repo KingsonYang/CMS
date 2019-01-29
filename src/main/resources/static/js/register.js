@@ -1,25 +1,43 @@
 $(function(){
+$("#insert_name").blur(function(){
+                $("#insert_name").css("background-color","#D6D6FF");
+                var name = $("#insert_name").val();
+                $.ajax({
+                url:"/checkNameIsRegister",
+                data:{
+                     name:name
+                 },
+                 type:"get",
+                 dataType:"text",
+                 success:function(msg){
+                    var jsonData = JSON.parse(msg);
+                    if(jsonData.code == 404){
+                          $("#help-checkName").text(jsonData.msg.username);
+                          $("#insert_name").focus();
+                    }else{
+                          $("#help-checkName").text("");
+                    }
+                }
+
+                });
+             });
 $("#user_insert_btn").click(function(){
 
 	//前端正则表达式验证
-	if(!validate_add_form()){
+	/*if(!validate_add_form()){
 		return false;
-	}
+	}*/
 	//验证用户名是否已经被占用
-	if($(this).attr("ajax-va")=="error"){
+	/*if($(this).attr("ajax-va")=="error"){
 		return false;
-	}
+	}*/
 
-	var kaptcha = $("#kaptcha").val();
-	if (kaptcha.length == 0) {
-		alert("您没有输入验证码！");
-	} else {
-		var name = $("#insert_name").val();
-		var password = $("#insert_password").val();
+	var name = $("#insert_name").val();
+	var password = $("#insert_password").val();
 
-		//发起ajax进行添加操作
-		$.ajax({
-			url:"/index/register",
+	//发起ajax进行添加操作
+	$.ajax({
+			url:"/register",
 			data:{"name":name,"password":password},
 			type:"post",
 			success:function(msg){
@@ -28,9 +46,8 @@ $("#user_insert_btn").click(function(){
 					//这里再次经过请求才进登录页面
 					//如果放在静态static下静态页面就可以直接这样子跳页面:window.location.href = "signin.html";
 					//但是在templates下必须经过请求否则就会暴露页面不安全
-
 					//跳转到登录页面
-					window.location.href = "http://localhost:8080/index/welcome";
+					window.location.href = "http://localhost:8080/";
 				}else{
 					alert("---注册失败---");
 					//显示失败信息
@@ -48,10 +65,5 @@ $("#user_insert_btn").click(function(){
 			error:function(){
 			}
 		});
-	}
-
-
-
-
 });
 });

@@ -9,16 +9,23 @@ public class MsgUtil {
 
     private static MsgUtil msgUtil = new MsgUtil();
 
+    public static MsgUtil error(String str, Map<String, Object> map){
+        msgUtil.setCode(404);
+        msgUtil.setMsg(map);
+        return msgUtil;
+    }
+
     public static MsgUtil error(){
+        msgUtil.setCode(404);
         return msgUtil;
     }
 
     public static MsgUtil success(){
-        return new MsgUtil(200,null);
+        msgUtil.setCode(200);
+        return msgUtil;
     }
 
     public static MsgUtil add(String str, Map<String, Object> map){
-        msgUtil.setCode(404);
         msgUtil.setMsg(map);
         return msgUtil;
     }
@@ -27,8 +34,8 @@ public class MsgUtil {
 
     }
 
-    public MsgUtil(int status, Map msg) {
-        this.code = status;
+    public MsgUtil(int code, Map msg) {
+        this.code = code;
         this.msg = msg;
     }
 
@@ -36,8 +43,8 @@ public class MsgUtil {
         return code;
     }
 
-    public void setCode(int status) {
-        this.code = status;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public Map getMsg() {

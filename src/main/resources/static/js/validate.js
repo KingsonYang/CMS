@@ -2,6 +2,7 @@
 function show_validate_msg(ele, status, msg) {
 	if ("success" == status) {
 		// 让父容器变色
+		$(ele).parent().removeClass("has-error");
 		$(ele).parent().addClass("has-success");
 		// 给sapn赋值正确信息
 		$(ele).next("span").text(msg);

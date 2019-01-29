@@ -21,7 +21,7 @@ public class KaptchaController {
      * @author:
      * @date: 2019年1月14日
      */
-    @RequestMapping(value = "index/kaptcha", method = RequestMethod.POST)
+    @RequestMapping(value = "kaptcha", method = RequestMethod.POST)
     @ResponseBody
     public String loginCheck(HttpServletRequest request,
 //	            @RequestParam(value = "username", required = true) String username,

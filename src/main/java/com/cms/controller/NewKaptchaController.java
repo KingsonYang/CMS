@@ -33,7 +33,7 @@ public class NewKaptchaController {
         this.captchaProducer = captchaProducer;
     }
 
-    @RequestMapping("index/kaptcha.jpg")
+    @RequestMapping("kaptcha.jpg")
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception{
         // Set to expire far in the past.
         response.setDateHeader("Expires", 0);

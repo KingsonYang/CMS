@@ -9,12 +9,12 @@
 </head>
 <body>
 <h2>用户列表</h2>
-<div>
+<!--<div>
     <h3 th:text="${session.session_user}"></h3>
     <h3 th:text="${session.session_user}.id"></h3>
     <h3 th:text="${session.session_user}.name"></h3>
-</div>
-<!--<div>
+</div>-->
+<div>
     <ul>
         <li th:each="user:${users}">
             <span th:text="${user.id}"></span>-
@@ -22,7 +22,7 @@
             <span th:text="${user.age}"></span>-
         </li>
     </ul>
-</div>-->
+</div>
 
 </body>
 </html>

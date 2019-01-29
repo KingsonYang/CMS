@@ -15,7 +15,7 @@ $(function() {
 				kaptcha : this.value
 			};
 			$.ajax({
-				url : "/index/kaptcha",
+				url : "/kaptcha",
 				data : paramsTime,
 				type : "POST",
 				success : function(data) {
@@ -23,11 +23,11 @@ $(function() {
 						//显示验证码错误信息
 						show_validate_msg("#kaptcha", "error", "验证码错了");
 						//禁用按钮
-						$('#user_insert_btn').attr('disabled',"true");
+						$('#user_login_btn').attr('disabled',"true");
 					}else{
 						//显示验证码正确信息
 						show_validate_msg("#kaptcha", "success", "验证码正确");
-						$('#user_insert_btn').removeAttr("disabled");
+						$('#user_login_btn').removeAttr("disabled");
 					}
 
 				}

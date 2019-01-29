@@ -21,7 +21,7 @@
         <div class="col-sm-10">
             <input type="text" class="form-control" id="insert_name"
                    name="Name" placeholder="请输入账号"/> <span
-                class="help-block"></span>
+                class="help-block" id="help-checkName"></span>
         </div>
         <div class="col-sm-10">
             <input type="password" class="form-control" id="insert_password"
@@ -29,28 +29,12 @@
                 class="help-block"></span>
         </div>
         <button type="button" class="btn btn-primary" id="user_insert_btn">注册</button>
-
-
     </form>
 </div>
 
 <script th:inline="javascript">
          $(function(){
-             $("#insert_name").blur(function(){
-                $("#insert_name").css("background-color","#D6D6FF");
-                var name = $("#insert_name").val();
-                $.ajax({
-                url:"/index/check",
-                data:{
-                     name:name
-                 },
-                 type:"get",
-                 dataType:"text",
-                 success:function(text){
-                    $("span").text(text);
-                }
-                });
-             });
+
 
          });
 </script>

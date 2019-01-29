@@ -6,6 +6,7 @@ import com.cms.util.DateUtil;
 import com.cms.util.MsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +23,13 @@ import java.util.Map;
  * Created by hs on 2018.12.27.
  */
 @Controller
-@RequestMapping("/index")
+@RequestMapping("/")
 public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    Map map = new HashMap();
 
     @RequestMapping("")
     public String show(){
@@ -39,15 +42,15 @@ public class LoginController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/check",method = RequestMethod.GET)
+    @RequestMapping(value = "/checkNameIsRegister",method = RequestMethod.GET)
     public MsgUtil checkUserName(@RequestParam("name") String username){
         boolean bl = userService.checkName(username);
         if(bl){
-            return MsgUtil.success();
-        }else{
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("username", "用户名已被注册");
-            return MsgUtil.error().add("map", map);
+            return MsgUtil.error("map", map);
+        }else{
+            return MsgUtil.success();
         }
     }
 
@@ -56,17 +59,18 @@ public class LoginController {
      * @param user
      * @param request
      * @return
-     * @throws IOException
+     * @throws
      */
     @ResponseBody
     @RequestMapping("/Login")
-    public MsgUtil login(User user, HttpServletRequest request) throws IOException {
+    public MsgUtil login(User user, HttpServletRequest request){
         User u1 =userService.login(user.getName(),user.getPassword());
         if (u1!=null) {
-            request.getSession().setAttribute("session_user",user);//登录成功后将用户放入session中，用于拦截
-            return MsgUtil.success();
+            request.getSession().setAttribute("session_user",u1);//登录成功后将用户放入session中，用于拦截
+            map.put("login_user",u1);
+            return MsgUtil.success().add("login_user",map);
         } else {
-            return MsgUtil.error();
+            return MsgUtil.error("map", null);
         }
     }
 
@@ -88,14 +92,7 @@ public class LoginController {
     @ResponseBody
     @RequestMapping("/register")
     public MsgUtil Register(String name,String password) {
-        //判断该用户名是否已被注册
-        boolean u1 = userService.checkName(name);
 
-        if (u1) {
-            Map<String, Object> map2 = new HashMap<String, Object>();
-            map2.put("username", "用户名已被注册");
-            return MsgUtil.error().add("map", map2);
-        } else {
             User user = new User();
             user.setName(name);
             user.setPassword(password);
@@ -114,9 +111,9 @@ public class LoginController {
             if (flag==1) {
                 return MsgUtil.success();
             } else {
-                return MsgUtil.error();
+                return MsgUtil.error("map", null);
             }
-        }
+
     }
 
 

@@ -2,11 +2,12 @@ package com.cms.entity;
 
 import java.io.Serializable;
 
-public class CourseInfo implements Serializable {
+public class Score implements Serializable {
 
     private Integer id;
-    private String name;
-    private String dec;
+    private Integer stu_id;
+    private Integer course_id;
+    private Double score;
     private Double credit;
 
     private static final long serialVersionUID = 1L;
@@ -19,20 +20,28 @@ public class CourseInfo implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Integer getStu_id() {
+        return stu_id;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setStu_id(Integer stu_id) {
+        this.stu_id = stu_id;
     }
 
-    public String getDec() {
-        return dec;
+    public Integer getCourse_id() {
+        return course_id;
     }
 
-    public void setDec(String dec) {
-        this.dec = dec == null ? null : dec.trim();
+    public void setCourse_id(Integer course_id) {
+        this.course_id = course_id;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
     }
 
     public Double getCredit() {
@@ -50,8 +59,9 @@ public class CourseInfo implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", dec=").append(dec);
+        sb.append(", stu_id=").append(stu_id);
+        sb.append(", course_id=").append(course_id);
+        sb.append(", score=").append(score);
         sb.append(", credit=").append(credit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
