@@ -13,15 +13,20 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <!--引入js-->
     <script type="text/javascript" th:src="@{/js/UserManage/UserInfo.js}"></script>
-
 </head>
 <body>
     <h3>个人信息</h3>
     <div th:object="${userInfo}">
         <p>学号: <span name="id" id="id" th:text="*{id}"></span></p>
         <p>用户名: <span name="Name" id="name" th:text="*{name}"></span></p>
-        <p>密码: <span name="password" id="password" th:text="*{password}"></span></p>
         <p>性别: <span name="sex" id="sex" th:text="*{sex}"></span></p>
+        <p>年龄: <span name="age" id="age" th:text="*{age}"></span></p>
+        <p>电话: <span name="phoneno" id="phoneno" th:text="*{phoneno}"></span></p>
+        <p>Email: <span name="Email" id="Email" th:text="*{email}"></span></p>
+        <p>学校: <span name="school_name" id="school_name" th:text="*{schoolName}"></span></p>
+        <p>系别: <span name="dept_name" id="dept_name" th:text="*{deptName}"></span></p>
+        <p>班级: <span name="class_name" id="class_name" th:text="*{className}"></span></p>
+        <p>入学时间: <span name="class_name" id="createtime" th:text="${#dates.format(userInfo.createTime, 'yyyy-MM-dd')}"></span></p>
     </div>
 
 </body>

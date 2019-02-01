@@ -15,6 +15,12 @@ public class MsgUtil {
         return msgUtil;
     }
 
+    public static MsgUtil error(Map<String, Object> map){
+        msgUtil.setCode(404);
+        msgUtil.setMsg(map);
+        return msgUtil;
+    }
+
     public static MsgUtil error(){
         msgUtil.setCode(404);
         return msgUtil;
@@ -26,6 +32,11 @@ public class MsgUtil {
     }
 
     public static MsgUtil add(String str, Map<String, Object> map){
+        msgUtil.setMsg(map);
+        return msgUtil;
+    }
+
+    public static MsgUtil add(Map<String, Object> map){
         msgUtil.setMsg(map);
         return msgUtil;
     }

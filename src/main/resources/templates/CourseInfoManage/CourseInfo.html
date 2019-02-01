@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--上面这三个标签必须放在最前面-->
+    <title>个人信息</title>
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <!--引入js-->
+    <script type="text/javascript" th:src="@{/js/CourseInfoManage/CourseInfo.js}"></script>
+</head>
+<body>
+    <h3>所有课程</h3>
+    <ul>
+        <li th:each="courseInfo:${courseInfoList}">
+            <span th:text="${courseInfo.id}"></span>-
+            <span th:text="${courseInfo.name}"></span>-
+            <span th:text="${courseInfo.dec}"></span>-
+            <span th:text="${courseInfo.credit}"></span>-
+            <span th:text="${courseInfo.character}"></span>-
+        </li>
+        <!--{
+        "currentPage": 1,
+        "pageSize": 1,
+        "total": 1,
+        "pages": 1,
+        "list": [
+        {
+        "id": 1,
+        "name": "Java基础",
+        "dec": "从入门到放弃",
+        "credit": 5,
+        "character": 1
+        }
+        ],
+        "isFirstPage": true,
+        "isLastPage": true
+        }-->
+        <li th:text="${courseInfos.currentPage}"></li>
+        <li th:text="${courseInfos.isFirstPage}"></li>
+        <li th:text="${courseInfos.total}"></li>
+        <li th:each="courses:${courseInfos.list}">
+            <span th:text="${courses.id}"></span>-
+            <span th:text="${courses.name}"></span>-
+            <span th:text="${courses.dec}"></span>-
+            <span th:text="${courses.credit}"></span>-
+            <span th:text="${courses.character}"></span>-
+        </li>
+    </ul>
+</body>
+</html>

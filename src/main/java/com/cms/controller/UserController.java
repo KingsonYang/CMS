@@ -1,6 +1,7 @@
 package com.cms.controller;
 
 import com.cms.entity.User;
+import com.cms.entity.custom.UserInfo;
 import com.cms.service.UserService;
 import com.cms.util.DateUtil;
 import com.cms.util.MsgUtil;
@@ -30,8 +31,11 @@ public class UserController {
     @RequestMapping("/user")
     public String showUserInfo(Model model,HttpServletRequest request){
         User u1 = (User) request.getSession().getAttribute("session_user");
-        model.addAttribute("userInfo",u1);
+        UserInfo userInfo = userService.getUserInfo(u1.getId());
+        DateUtil.getCurrTime(userInfo.getCreateTime());
+        model.addAttribute("userInfo",userInfo);
         return "UserManage/UserInfo";
+//        return userInfo.toString();
     }
 
     /**
@@ -48,11 +52,6 @@ public class UserController {
         User u1 = (User) request.getSession().getAttribute("session_user");
         return userService.selectById(u1.getId()).toString();
     }
-
-    /*@RequestMapping(value = "/user",method = RequestMethod.GET)
-    public String lookUserInfo(@RequestParam Integer id){
-        return userService.selectById(id).toString();
-    }*/
 
     @RequestMapping("/{id}")
     public String getUserById(@PathVariable int id){
@@ -96,7 +95,7 @@ public class UserController {
     @RequestMapping("/checkOldPwd")
     public MsgUtil checkOldPwd(String password, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("session_user");
-        User u1 =userService.login(user.getName(),password);
+        User u1 =userService.login(user.getName(),password,user.getRoleId());
         if (u1!=null) {
             return MsgUtil.success();
         } else {

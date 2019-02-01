@@ -29,3 +29,19 @@ logging:
     com:
       example:
         mapper : debug
+
+#############################
+#########分页插件配置########
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+#############################
+
+
+#############################
+######用户自定义参数#########
+user:
+  default_pwd: 123456
+#############################

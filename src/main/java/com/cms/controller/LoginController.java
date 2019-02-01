@@ -6,7 +6,6 @@ import com.cms.util.DateUtil;
 import com.cms.util.MsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,13 +63,14 @@ public class LoginController {
     @ResponseBody
     @RequestMapping("/Login")
     public MsgUtil login(User user, HttpServletRequest request){
-        User u1 =userService.login(user.getName(),user.getPassword());
+        User u1 =userService.login(user.getName(),user.getPassword(),user.getRoleId());
         if (u1!=null) {
             request.getSession().setAttribute("session_user",u1);//登录成功后将用户放入session中，用于拦截
             map.put("login_user",u1);
             return MsgUtil.success().add("login_user",map);
         } else {
-            return MsgUtil.error("map", null);
+            map.put("msg","请检查用户名密码重新登陆！");
+            return MsgUtil.error("map", map);
         }
     }
 

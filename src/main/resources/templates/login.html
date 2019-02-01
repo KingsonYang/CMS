@@ -19,11 +19,9 @@
         请你输入密码--：<input type="password" name="Password" id="login_password"/><br>
 
         <div>
-            <label><input name="user" type="radio" value="3" />学生 </label>
-            <label><input name="user" type="radio" value="2" />教师 </label>
-            <label><input name="user" type="radio" value="1" />管理员 </label>
-            <label><input name="user" type="radio" value="" />4 </label>
-            <label><input name="user" type="radio" value="" />5 </label>
+            <label><input name="user" type="radio" value="2" />管理员 </label>
+            <label><input name="user" type="radio" value="3" />教师 </label>
+            <label><input name="user" type="radio" value="4" checked="checked"/>学生 </label>
         </div>
     </div>
 
@@ -36,6 +34,7 @@
         <small>看不清，点击换一张</small>
     </div>
     <!-- end:验证码 -->
+    <p id="error_msg"></p>
     <input type="submit"  id="user_login_btn" value="Login"/>
     <!--<a href="/Register">&#45;&#45;注册&#45;&#45;</a>-->
 </body>

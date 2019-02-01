@@ -1,6 +1,7 @@
 package com.cms.dao;
 
 import com.cms.entity.User;
+import com.cms.entity.custom.UserInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface UserMapper {
      * @param passWord
      * @return
      */
-    User login(String userName, String passWord);
+    User login(String userName, String passWord,int role_id);
 
     /**
      * 检查数据库用户名
@@ -31,4 +32,6 @@ public interface UserMapper {
     List<User> selectAll();
 
     int updateByPrimaryKey(User record);
+
+    UserInfo selectUserInfoByID(Integer id);
 }

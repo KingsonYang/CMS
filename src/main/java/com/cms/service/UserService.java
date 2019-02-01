@@ -2,6 +2,8 @@ package com.cms.service;
 
 import com.cms.entity.User;
 import com.cms.dao.UserMapper;
+import com.cms.entity.custom.UserInfo;
+import com.cms.util.ConfUtil;
 import com.cms.util.DateUtil;
 import com.cms.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class UserService{
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    private ConfUtil confUtil;
+
     public List<User> selectAll(){
         return userMapper.selectAll();
     }
@@ -33,13 +38,20 @@ public class UserService{
         return userMapper.checkByName(username) != null ? true : false;
     }
 
-    public User login(String userName, String passWord) {
-        return userMapper.login(userName,MD5Util.getMD5(passWord.getBytes()));
+    /**
+     * 登陆
+     * @param userName
+     * @param passWord
+     * @param role_id
+     * @return
+     */
+    public User login(String userName, String passWord,int role_id) {
+        return userMapper.login(userName,MD5Util.getMD5(passWord.getBytes()),role_id);
     }
 
     @Transactional
     public int register(User user) {
-        user.setPassword(MD5Util.getMD5(user.getPassword().getBytes()));
+        user.setPassword(MD5Util.getMD5(confUtil.getDefault_pwd().getBytes()));
         return userMapper.insert(user);
     }
 
@@ -54,10 +66,11 @@ public class UserService{
         return userMapper.updateByPrimaryKey(user);
     }
 
-    //查询用户所有信息
-    public void getUserInfo(){
-        //查询学生基本信息
-        //查询学生的班级信息
+    /**
+     * 查询用户所有信息
+     */
+    public UserInfo getUserInfo(Integer id){
+        return userMapper.selectUserInfoByID(id);
     }
 
 

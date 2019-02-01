@@ -8,6 +8,7 @@ public class CourseInfo implements Serializable {
     private String name;
     private String dec;
     private Double credit;
+    private Integer character;
 
     private static final long serialVersionUID = 1L;
 
@@ -43,6 +44,14 @@ public class CourseInfo implements Serializable {
         this.credit = credit;
     }
 
+    public Integer getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Integer character) {
+        this.character = character;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -53,6 +62,7 @@ public class CourseInfo implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", dec=").append(dec);
         sb.append(", credit=").append(credit);
+        sb.append(", character=").append(character);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

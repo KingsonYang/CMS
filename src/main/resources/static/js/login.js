@@ -7,7 +7,18 @@ $(function(){
     }
 });*/
 
+var radio = $('input[type=radio][name=user]:checked').val();
+
+/*单选按钮改变*/
+$('input[type=radio][name=user]').change(function() {
+        radio = this.value;
+        console.log(radio);
+});
+
+/*点击登陆*/
 $("#user_login_btn").click(function(){
+
+    console.log(radio);
 
 	//前端正则表达式验证
 	if(!validate_add_form()){
@@ -28,7 +39,7 @@ $("#user_login_btn").click(function(){
 		//发起ajax进行添加操作
 		$.ajax({
 			url:"/Login",
-			data:{"name":name,"password":password},
+			data:{"name":name,"password":password,"roleId":radio},
 			type:"post",
 			success:function(msg){
 				if(msg.code==200){
@@ -38,16 +49,9 @@ $("#user_login_btn").click(function(){
 					//跳转到登录页面
 					window.location.href = "http://localhost:8080/welcome";
 				}else{
-					alert("---登陆失败---");
-					//显示失败信息
-					//有哪个字段错误,就显示哪个字段
-					if(undefined!=msg.msg.map.username){
-						//显示账号错误信息
-						show_validate_msg("#insert_name","error",msg.msg.map.username);
-					}
-					if(undefined!=msg.msg.map.password){
-						show_validate_msg("#insert_password","error",msg.msg.map.password);
-					}
+					alert(msg.msg.msg);
+					//显示账号错误信息
+//					show_validate_msg("#error_msg","error",msg.msg.msg);
 				}
 
 			},
@@ -55,9 +59,5 @@ $("#user_login_btn").click(function(){
 			}
 		});
 	}
-
-
-
-
 });
 });

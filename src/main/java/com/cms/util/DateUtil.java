@@ -32,5 +32,9 @@ public class DateUtil {
         return sd.format(date);
     }
 
+    public static String transformCurrTime(Date date){
+        SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
+        return sd.format(date);
+    }
 
 }
