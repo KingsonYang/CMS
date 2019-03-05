@@ -12,45 +12,40 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <!--引入js-->
-    <script type="text/javascript" th:src="@{/js/CourseInfoManage/CourseInfo.js}"></script>
+    <script type="text/javascript" th:src="@{../js/CourseInfoManage/CourseInfo.js}"></script>
 </head>
 <body>
     <h3>所有课程</h3>
     <ul>
-        <li th:each="courseInfo:${courseInfoList}">
+        <div id="content_left">
+            <li th:each="courses:${courseInfos.list}">
+                <span th:text="${courses.id}"></span>-
+                <span th:text="${courses.name}"></span>-
+                <span th:text="${courses.dec}"></span>-
+                <span th:text="${courses.credit}"></span>-
+                <span th:text="${courses.character}"></span>-
+            </li>
+        </div>
+        <div id="page">
+            <strong>
+                <span class="pc">1</span>
+            </strong>
+            <a href="javascript:void(0);">
+                <span class="pc">2</span>
+            </a>
+        </div>
+        <span th:text="${courseInfos.currentPage}"></span>
+        <span th:text="${courseInfos.pageSize}"></span>
+        <span th:text="${courseInfos.pages}"></span>
+        <span th:text="${courseInfos.isFirstPage}"></span>
+        <!--<li th:text="${courseInfos.total}"></li>-->
+        <!--<li th:each="courseInfo:${courseInfoList}">
             <span th:text="${courseInfo.id}"></span>-
             <span th:text="${courseInfo.name}"></span>-
             <span th:text="${courseInfo.dec}"></span>-
             <span th:text="${courseInfo.credit}"></span>-
             <span th:text="${courseInfo.character}"></span>-
-        </li>
-        <!--{
-        "currentPage": 1,
-        "pageSize": 1,
-        "total": 1,
-        "pages": 1,
-        "list": [
-        {
-        "id": 1,
-        "name": "Java基础",
-        "dec": "从入门到放弃",
-        "credit": 5,
-        "character": 1
-        }
-        ],
-        "isFirstPage": true,
-        "isLastPage": true
-        }-->
-        <li th:text="${courseInfos.currentPage}"></li>
-        <li th:text="${courseInfos.isFirstPage}"></li>
-        <li th:text="${courseInfos.total}"></li>
-        <li th:each="courses:${courseInfos.list}">
-            <span th:text="${courses.id}"></span>-
-            <span th:text="${courses.name}"></span>-
-            <span th:text="${courses.dec}"></span>-
-            <span th:text="${courses.credit}"></span>-
-            <span th:text="${courses.character}"></span>-
-        </li>
+        </li>-->
     </ul>
 </body>
 </html>

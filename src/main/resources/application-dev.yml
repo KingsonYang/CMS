@@ -15,9 +15,12 @@ spring:
       mode: html5
       servlet:
         content-type: text/html
+  mvc:
+    static-path-pattern: /**
 
 resources:
-  static-locations: classpath:/resources/, classpath:/static/ ,classpath:/templates/
+  static-locations: ["/templates/","/resources/","/static/","/public/"]
+#  static-locations: classpath:/resources/, classpath:/static/** ,classpath:/templates/**
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml

@@ -1,8 +1,10 @@
 package com.cms.entity;
 
+import com.cms.entity.custom.BaseEntity;
+
 import java.io.Serializable;
 
-public class CourseInfo implements Serializable {
+public class CourseInfo extends BaseEntity implements Serializable {
 
     private Integer id;
     private String name;
