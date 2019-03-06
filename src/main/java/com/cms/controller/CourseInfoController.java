@@ -24,12 +24,17 @@ public class CourseInfoController {
 
     Map map = new HashMap();
 
-    @GetMapping("/courseInfoList")
-    public ResponseEntity courseInfoList (CourseInfo courseInfo){
-        CourseInfo userEntity = new CourseInfo();
-        List<CourseInfo> courseInfoList = courseInfoService.selectAll(courseInfo);
-        //Log.info(userEntityList);
-        return new ResponseEntity(courseInfoList, HttpStatus.OK);
+    /**
+     * 根据ID删除课程信息
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/delById")
+    public MsgUtil delById(int id){
+        int flag = courseInfoService.deleteByPrimaryKey(id);
+
+        return MsgUtil.success();
     }
 
     /**
@@ -39,8 +44,9 @@ public class CourseInfoController {
      */
     @ResponseBody
     @RequestMapping("/queryList")
-    public ResponseEntity queryList(CourseInfo courseInfo) {
+    public ResponseEntity queryList(CourseInfo courseInfo,Model model) {
         List<CourseInfo> courseInfos = courseInfoService.selectAll(courseInfo);
+        model.addAttribute("courseInfoes",new PageEntity<>(courseInfos));
         return new ResponseEntity( new PageEntity<>(courseInfos), HttpStatus.OK);
     }
 
@@ -53,7 +59,7 @@ public class CourseInfoController {
     @RequestMapping("/list")
     public String selectAll(Model model,CourseInfo courseInfo){
         List<CourseInfo> list = courseInfoService.selectAll(courseInfo);
-        model.addAttribute("courseInfoList",list);
+//        model.addAttribute("courseInfoList",list);
         model.addAttribute("courseInfos",new PageEntity<>(list));
         return "CourseInfoManage/CourseInfo";
     }

@@ -13,6 +13,10 @@ public class CourseInfoService {
     @Autowired
     private CourseInfoMapper courseInfoMapper;
 
+    public int deleteByPrimaryKey(int id){
+        return courseInfoMapper.deleteByPrimaryKey(id);
+    }
+
     public List<CourseInfo> selectAll(CourseInfo courseInfo){
         return courseInfoMapper.selectAll(courseInfo);
     }
