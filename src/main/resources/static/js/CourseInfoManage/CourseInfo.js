@@ -4,23 +4,26 @@ $(function(){
     var pageSize = 20;
     var pageNum = 1;
     var datas  = [];
-//    init(pageSize,pageNum);
 
-    $.ajax({
-                url:"/courseInfo/queryList",
-                data:{
-                    "pageSize":pageSize,
-                    "pageNum":pageNum
-                },
-                type:"post",
-                success:function(msg){
-                    datas = msg.list;
-                    console.log(datas);
-                    initTable();
-                }
-            })
+    initHtml();
 
-function initTable(){
+    function initHtml() {
+        $.ajax({
+            url:"/courseInfo/queryList",
+            data:{
+                "pageSize":pageSize,
+                "pageNum":pageNum
+            },
+            type:"post",
+            success:function(msg){
+                datas = msg.list;
+                console.log(datas);
+                initTable();
+            }
+        })
+    }
+
+    function initTable(){
     $("#table").bootstrapTable({ // 对应table标签的id
               cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
               striped: true,  //表格显示条纹，默认为false
@@ -49,7 +52,7 @@ function initTable(){
                       }},
                   {title: "操作",align: 'center',valign: 'middle',width: 160, // 定义列的宽度，单位为像素px
                       formatter: function (value, row, index) {
-                          return '<button class="btn btn-primary btn-sm" onclick="del(\'' + row.stdId + '\')">删除</button>';
+                          return '<button class="btn btn-primary btn-sm" onclick="del(\'' + row.id + '\')">删除</button>';
                       }
                   }
               ],
@@ -57,10 +60,8 @@ function initTable(){
         })
 }
 
-
-})
-
-function del(id){
+    /*根据id删除*/
+    function del(id){
         $.ajax({
             url:"/courseInfo/delById",
             data:{
@@ -68,7 +69,14 @@ function del(id){
             },
             type:"post",
             success:function(msg){
-
+                if(msg.code==200){
+                    alert("删除成功");
+                    initHtml();
+                }else if(msg.code==404){
+                    alert("删除失败");
+                }
             }
         })
     }
+
+})

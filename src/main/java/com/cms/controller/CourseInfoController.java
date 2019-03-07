@@ -25,6 +25,28 @@ public class CourseInfoController {
     Map map = new HashMap();
 
     /**
+     * 新增一条数据
+     * @param courseInfo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/add")
+    public MsgUtil insert(CourseInfo courseInfo){
+        return  courseInfoService.insert(courseInfo) == 1 ? MsgUtil.success() : MsgUtil.error();
+    }
+
+    /**
+     *根据ID修改课程信息
+     * @param courseInfo
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateById")
+    public MsgUtil update(CourseInfo courseInfo){
+        return  courseInfoService.updateByPrimartKey(courseInfo) == 1 ? MsgUtil.success() : MsgUtil.error();
+    }
+
+    /**
      * 根据ID删除课程信息
      * @param id
      * @return
@@ -33,8 +55,11 @@ public class CourseInfoController {
     @RequestMapping("/delById")
     public MsgUtil delById(int id){
         int flag = courseInfoService.deleteByPrimaryKey(id);
-
-        return MsgUtil.success();
+        if(flag == 1){
+            return MsgUtil.success();
+        }else{
+            return MsgUtil.error();
+        }
     }
 
     /**
