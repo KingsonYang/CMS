@@ -62,6 +62,16 @@ public class CourseInfoController {
         }
     }
 
+
+    @ResponseBody
+    @RequestMapping("/queryList1")
+    public List<CourseInfo> queryList1(CourseInfo courseInfo,Model model) {
+        List<CourseInfo> courseInfos = courseInfoService.selectAll(courseInfo);
+//        model.addAttribute("courseInfoes",new PageEntity<>(courseInfos));
+        return courseInfos;
+    }
+
+
     /**
      * 获取课程信息分页显示
      * @param courseInfo
