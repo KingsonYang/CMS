@@ -11,8 +11,8 @@ public class ClassInfo extends BaseEntity implements Serializable{
     private String deptName;
     private String className;
     private String classShortname;
-    private Date createTime;
-    private Date updateTime;
+    private String createTime;
+    private String updateTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -57,19 +57,19 @@ public class ClassInfo extends BaseEntity implements Serializable{
         this.classShortname = classShortname == null ? null : classShortname.trim();
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 
