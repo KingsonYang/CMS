@@ -40,13 +40,13 @@ public class UserService{
 
     /**
      * 登陆
-     * @param userName
+     * @param id
      * @param passWord
      * @param role_id
      * @return
      */
-    public User login(String userName, String passWord,int role_id) {
-        return userMapper.login(userName,MD5Util.getMD5(passWord.getBytes()),role_id);
+    public User login(int id, String passWord,int role_id) {
+        return userMapper.login(id,MD5Util.getMD5(passWord.getBytes()),role_id);
     }
 
     @Transactional

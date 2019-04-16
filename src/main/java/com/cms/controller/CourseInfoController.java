@@ -54,12 +54,7 @@ public class CourseInfoController {
     @ResponseBody
     @RequestMapping("/delById")
     public MsgUtil delById(int id){
-        int flag = courseInfoService.deleteByPrimaryKey(id);
-        if(flag == 1){
-            return MsgUtil.success();
-        }else{
-            return MsgUtil.error();
-        }
+        return courseInfoService.deleteByPrimaryKey(id) == 1 ? MsgUtil.success() : MsgUtil.error();
     }
 
 

@@ -74,7 +74,7 @@
     from user
   </select>
   <select id="login" resultMap="BaseResultMap">
-    SELECT * FROM user where Name = #{param1} and Password = #{param2} and Role_ID = #{param3}
+    SELECT * FROM user where ID = #{param1} and Password = #{param2} and Role_ID = #{param3}
   </select>
   <select id="checkByName" resultMap="BaseResultMap">
     SELECT * FROM user where Name = #{param1}

@@ -16,11 +16,11 @@ public interface UserMapper {
 
     /**
      * 登陆检查
-     * @param userName
+     * @param id
      * @param passWord
      * @return
      */
-    User login(String userName, String passWord,int role_id);
+    User login(int id, String passWord,int role_id);
 
     /**
      * 检查数据库用户名

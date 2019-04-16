@@ -1,0 +1,273 @@
+body{
+    font: 14px/1.5 "PingFang SC", "Lantinghei SC", "Microsoft YaHei", "HanHei SC", "Helvetica Neue", "Open Sans", Arial, "Hiragino Sans GB", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+}
+body ,div{
+    margin: 0;
+    padding: 0;
+}
+/* 登录页面body样式表 */
+.main-body{
+	background: url(../images/login-bg.jpg) no-repeat;
+	background-size: cover;
+	height: 900px;
+	width: 100%;
+    min-height: 100%;
+    min-width: 900px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+/* 登录头部 */
+.login-headr {
+    /* padding-top: 100px; */
+    /*width: 300px;*/
+    height: 300px;
+    color: #ffffff;
+}
+.login-headr img{
+    padding-top: 110px;
+    display: inline-block;
+    vertical-align: middle;
+    zoom: 1;
+
+}
+.login-headr p {
+    position: absolute;
+    top: 110px;
+    left: 300px;
+    font-size: 40px; 
+}
+/* 登录框样式表 */
+.login-main{
+    width: 400px;
+    height: 500px;
+    /* text-align: center; */
+    margin-top: -200px;
+    margin-right: 80px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    padding: 0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.login-box ,.register-box{
+    width: 400px;
+    min-height: 440px;
+    background: #ffffff;
+    position: relative;
+    margin: 0 auto;
+    padding: 30px 32px;
+    box-shadow: 0px 1px 12px 0px rgba(0, 0, 0, 0.2);
+}
+.register-box{
+    margin-top: -150px;
+    margin-left: 600px;
+    border-radius: 4px;
+
+}
+.l-static{
+    display: block;
+}
+.l-tab-covers {
+    font-size: 16px;
+    border-bottom: 1px solid #eeeeee;
+}
+.l-tab-covers .l-tab-list:hover, .l-tab-covers .l-tab-list.current {
+    color: #282828;
+    border-bottom: 2px solid #282828;
+    font-weight: 500;
+}
+
+.l-tab-covers .l-tab-list {
+    color: #999999;
+    display: inline-block;
+    margin-right: 30px;
+    /* border-bottom: 2px solid transparent; */
+    padding-bottom: 20px;
+    margin-bottom: -1px;
+    cursor: pointer;
+    font-family: "微软雅黑",sans-serif;
+}
+.static-module-covers {
+    background: #ffffff;
+    position: relative;
+    z-index: 2;
+    margin-top: 45px;
+    padding-bottom: 8px;
+}
+.pass-login-covers {
+    position: relative;
+}
+.error-tips {
+    position: absolute;
+    top: -54px;
+}
+.hide {
+    display: none;
+}
+.error-tips .ipt-default-current {
+    height: 42px;
+}
+.ipt-default-current {
+    width: 336px;
+}
+.ipt-tips-default {
+    width: 336px;
+    padding: 0 20px 0 45px;
+    border: 1px solid #d46f16;
+    border-radius: 4px;
+    background: #ffe6e5 url(../images/error-tips.png) no-repeat 20px 12px;
+    display: flex;
+    align-items: center;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.ipt-tips-default, .email, .password {
+    margin-bottom: 20px;
+}
+.email input:focus, .password input:focus{
+    background: #ffffff;
+}
+.text-style {
+    height: 42px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #666666;
+    font-size: 14px;
+    border: 1px solid #dddddd;
+    background: #f4f4f4;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+input, textarea, select, button {
+    font-family: inherit;
+    font-size: 14px;
+    border: 0;
+    outline: none;
+}
+.code {
+    margin-bottom: 20px;
+    position: relative;
+}
+.login {
+    margin-bottom: 20px;
+}
+.btn-current-big {
+    width: 336px;
+    height: 42px;
+    font-size: 16px;
+}
+.btn-disabled {
+    color: #bbbbbb;
+    background: #eeeeee;
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    cursor: default;
+}
+.btn-default-main {
+    color: #444444;
+    background: #ffd100;
+    border: 1px solid #ffd100;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+.auto-login {
+    line-height: 14px;
+}
+.auto-login .auto-login-cd {
+    background: url(../images/checkbox.png) no-repeat 0 2px;
+}
+.auto-login .auto-login-c {
+    background: url(../images/c.png) no-repeat 0 2px;
+}
+.auto-login input {
+    vertical-align: middle;
+    opacity: 0;
+    /* margin-right: 8px; */
+}
+input[type="checkbox"], input[type="radio"] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+}
+.login-links {
+    color: #999999;
+    float: right;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+.login-links a:hover{
+    color: #000000;
+}
+.third-login-box {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    margin-left: -87px;
+}
+.third-account {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #999999;
+}
+.third-account p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+.account-login {
+    text-align: center;
+}
+.account-login .wechat-login {
+    background-image: url(../img/wechat.png);
+}
+.account-login .wechat-login:hover{
+    background-color: green;
+}
+.account-login .weibo-login {
+    background-image: url(../img/weibo.png);
+    margin: 0 20px;
+}
+.account-login .weibo-login:hover{
+    background-color: red;
+}
+.account-login .qq-login {
+    background-image: url(../img/qq.png);
+}
+.account-login .qq-login:hover{
+    background-color: #03A2DC;
+}
+.account-login .weibo-login, .account-login .wechat-login, .account-login .qq-login {
+    width: 42px;
+    height: 42px;
+    background-color: #dddddd;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.account-login a {
+    display: inline-block;
+}
+
+.register-covers{
+    background: #ffffff;
+    position: relative;
+    z-index: 2;
+    margin-top: 45px;
+    padding-bottom: 8px;
+}

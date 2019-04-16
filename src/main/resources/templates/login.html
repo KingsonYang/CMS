@@ -8,23 +8,95 @@
     <script type="text/javascript" th:inline="javascript" th:src="@{js/jquery-3.3.1.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/login.css}" />
     <script type="text/javascript" th:src="@{/js/kaptcha.js}"></script>
     <script type="text/javascript" th:src="@{/js/validate.js}"></script>
     <script type="text/javascript" th:src="@{/js/login.js}"></script>
 </head>
 <body>
-    <div>
-        请输入用户名--：<input type="text" name="Name" id="login_name"/><span></span><br>
-        请你输入密码--：<input type="password" name="Password" id="login_password"/><br>
+<div class="main-body">
 
-        <div>
-            <label><input name="user" type="radio" value="2" />管理员 </label>
-            <label><input name="user" type="radio" value="3" />教师 </label>
-            <label><input name="user" type="radio" value="4" checked="checked"/>学生 </label>
-        </div>
+    <!--登录顶部-->
+    <div class="login-headr">
+        <img src="../../images/logo_school.png" th:attr="src=@{/images/logo_school.png}" />
+        <p>管理系统</p>
     </div>
 
-    <!-- begin:验证码 -->
+    <!--登录logo-->
+    <div class="login-logo"></div>
+
+    <!--登录主体div-->
+    <div class="login-main">
+        <div class="login-box" id="login-box">
+            <div class="l-static">
+                <div class="l-tab-covers">
+                    <div class="l-tab-list current">密码登录</div>
+                    <div class="l-tab-list">短信登录</div>
+                </div>
+                <div class="static-module-covers">
+                    <!--  这个是登录的div-->
+                    <div class="pass-login-covers">
+                        <!-- 这个div用来显示报错信息  -->
+                        <div class="error-tips hide" id="pass-error-tips">
+                            <span class="ipt-tips-default ipt-default-current js-err-l"></span>
+                        </div>
+                        <div class="email">
+                            <input type="text" name="id" id="login_name" oninput="changeLoginbtn()"
+                                   placeholder="用户名" autocomplete="off" maxlength="32"
+                                   class="text-style ipt-default-current">
+                        </div>
+                        <div class="password">
+
+                            <input type="password" name="Password" id="login_password" oninput="changeLoginbtn()"
+                                   placeholder="密码" maxlength="40" autocomplete="off"
+                                   class="text-style ipt-default-current">
+                        </div>
+
+                        <div class="">
+                            <label><input name="user" type="radio" value="2" class="auto-login-cd"/>管理员 </label>
+                            <label><input name="user" type="radio" value="3" class="auto-login-cd"/>教师 </label>
+                            <label><input name="user" type="radio" value="4" class="auto-login-cd" checked="checked"/>学生 </label>
+                        </div>
+
+                        <div class="password">
+                                <input type="text" class="form-control" id="kaptcha" name="kaptcha"
+                                       placeholder="请输入验证码" style="color: #000000;" /><span
+                                    class="help-block"></span>
+                                <img th:src="@{http://localhost:8080/kaptcha.jpg}" width="200" id="kaptchaImage" title="看不清，点击换一张" />
+                                <small>看不清，点击换一张</small>
+                            <p id="error_msg"></p>
+                        </div>
+
+                        <div class="login">
+                            <!--  btn-disabled  btn-default-main -->
+                            <input type="button" id="user_login_btn" class="btn-current-big btn-default-main"
+                                   disabled value="登录">
+                            <input type="button" id="" class="btn-current-big btn-default-main loadding-btn hide"
+                                   value="登录中...">
+                        </div>
+                        <!--<div class="auto-login">
+                            <label class="auto-login-cd" id="autolog-label">
+                                <input type="checkbox" name="autolog" id="autolog" class="auto-login-cd" checked>下次自动登录</label>
+                            <div class="login-links">
+                                <a href="" class="">忘记密码</a>
+                                &nbsp; | &nbsp;<a href="register.html" class="">注册</a>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+                <!--<div class="third-login-box">-->
+                    <!--<p class="third-account">第三方账号登录</p>-->
+                    <!--<div class="account-login">-->
+                        <!--<a class="wechat-login"></a>-->
+                        <!--<a class="weibo-login"></a>-->
+                        <!--<a class="qq-login"></a>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<!--    &lt;!&ndash; begin:验证码 &ndash;&gt;
     <div class="col-sm-10">
         <input type="text" class="form-control" id="kaptcha" name="kaptcha"
                placeholder="请输入验证码" style="color: #000000;" /><span
@@ -32,9 +104,9 @@
         <img th:src="@{http://localhost:8080/kaptcha.jpg}" width="200" id="kaptchaImage" title="看不清，点击换一张" />
         <small>看不清，点击换一张</small>
     </div>
-    <!-- end:验证码 -->
-    <p id="error_msg"></p>
-    <input type="submit"  id="user_login_btn" value="Login"/>
+    &lt;!&ndash; end:验证码 &ndash;&gt;
+    <p id="error_msg"></p>-->
+    <!--<input type="submit"  id="user_login_btn" value="Login"/>-->
     <!--<a href="/Register">&#45;&#45;注册&#45;&#45;</a>-->
 </body>
 </html>

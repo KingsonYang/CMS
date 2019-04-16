@@ -63,7 +63,7 @@ public class LoginController {
     @ResponseBody
     @RequestMapping("/Login")
     public MsgUtil login(User user, HttpServletRequest request){
-        User u1 =userService.login(user.getName(),user.getPassword(),user.getRoleId());
+        User u1 =userService.login(user.getId(),user.getPassword(),user.getRoleId());
         if (u1!=null) {
             request.getSession().setAttribute("session_user",u1);//登录成功后将用户放入session中，用于拦截
             map.put("login_user",u1);
@@ -136,7 +136,7 @@ public class LoginController {
     @RequestMapping("/SignOut")
     public String outUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().removeAttribute("session_user");
-        return "index";
+        return "login";
     }
 
 }

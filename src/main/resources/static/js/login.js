@@ -1,11 +1,11 @@
 $(function(){
 
 /*回车键绑定登陆按钮*/
-/*$(document).keydown(function(event){
+$(document).keydown(function(event){
     if(event.keyCode==13){
         $("#user_login_btn").click();
     }
-});*/
+});
 
 var radio = $('input[type=radio][name=user]:checked').val();
 
@@ -33,13 +33,13 @@ $("#user_login_btn").click(function(){
 	if (kaptcha.length == 0) {
 		alert("您没有输入验证码！");
 	} else {
-		var name = $("#login_name").val();
+		var id = $("#login_name").val();
 		var password = $("#login_password").val();
 
 		//发起ajax进行添加操作
 		$.ajax({
 			url:"/Login",
-			data:{"name":name,"password":password,"roleId":radio},
+			data:{"id":id,"password":password,"roleId":radio},
 			type:"post",
 			success:function(msg){
 				if(msg.code==200){
@@ -60,4 +60,18 @@ $("#user_login_btn").click(function(){
 		});
 	}
 });
+
+    function changeLoginbtn() {
+        var username = document.getElementById('id').value;
+        var password = document.getElementById('password').value;
+        if (username != "" && password != "") {
+            document.getElementById('loginbtn').removeAttribute("class");
+            document.getElementById('loginbtn').setAttribute("class","btn-current-big btn-default-main");
+            document.getElementById('loginbtn').removeAttribute("disabled");
+        }else{
+            document.getElementById('loginbtn').removeAttribute("class");
+            document.getElementById('loginbtn').setAttribute("disabled","disabled");
+            document.getElementById('loginbtn').setAttribute("class","btn-current-big btn-disabled");
+        }
+    }
 });

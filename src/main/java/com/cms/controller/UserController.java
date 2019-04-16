@@ -95,7 +95,7 @@ public class UserController {
     @RequestMapping("/checkOldPwd")
     public MsgUtil checkOldPwd(String password, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("session_user");
-        User u1 =userService.login(user.getName(),password,user.getRoleId());
+        User u1 =userService.login(user.getId(),password,user.getRoleId());
         if (u1!=null) {
             return MsgUtil.success();
         } else {
