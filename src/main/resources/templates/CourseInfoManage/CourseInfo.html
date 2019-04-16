@@ -1,67 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--上面这三个标签必须放在最前面-->
-    <title>个人信息</title>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-    <!--引入bootstrap table-->
-    <link rel="stylesheet" th:href="@{/css/bootstrap-table.min.css}" />
-    <!--引入js-->
-    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    <!-- bootstrap-table.min.js -->
-    <script type="text/javascript" th:src="@{/js/bootstrap-table.min.js}"></script>
-    <!-- 引入中文语言包 -->
-    <script type="text/javascript" th:src="@{/js/bootstrap-table-zh-CN.min.js}"></script>
-    <!--引入自定义js-->
-    <script type="text/javascript" th:src="@{../js/CourseInfoManage/CourseInfo.js}"></script>
-</head>
-<body>
-    <h3>所有课程</h3>
-    <div id="">
-        课程名<input type="text"  id="name" size="10"><button id="search">搜索</button>
-    </div>
-    <div id="action">
-        <button id="btn_add">添加</button>
-    </div>
-    <table id="table" style="margin:0px auto;border:1px solid #dddddd;"></table>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">新增</h4>
-                </div>
-                <div class="modal-body">
+<head th:include="common::commonHeader('课程管理')">
 
-                    <div class="form-group">
-                        <label for="txt_departmentname">课程名称</label>
-                        <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="部门名称">
+<body>
+<!--顶部导航栏部分-->
+<div th:include="common::commonNav"></div>
+
+<!-- 中间主体内容部分 -->
+<div th:include="common::commonCenter"></div>
+
+<!-- 左侧导航和正文内容的分隔线 -->
+<div class="splitter"></div>
+<!-- 正文内容部分 -->
+<div class="pageContent">
+    <!--<div class="container">-->
+        <div>
+            <button class="btn btn-primary btn-sm" id="btn_add">新增</button>
+            <table id="table" style="margin:0px auto;border:1px solid #dddddd;"></table>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="false">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <label for="course_name">课程名称</label>
+                                <input type="text" name="course_id" class="form-control display" id="course_id" placeholder="id" >
+                                <input type="text" name="course_name" class="form-control" id="course_name" placeholder="课程名称">
+                            </div>
+                            <div class="form-group">
+                                <label for="course_dec">简介</label>
+                                <input type="text" name="course_dec" class="form-control" id="course_dec" placeholder="简介">
+                            </div>
+                            <div class="form-group">
+                                <label for="course_credit">学分</label>
+                                <input type="text" name="course_credit" class="form-control" id="course_credit" placeholder="学分">
+                            </div>
+                            <div class="form-group">
+                                <label><input name="course_character" type="radio" value="1" class="auto-login-cd" checked/>必修 </label>
+                                <label><input name="course_character" type="radio" value="2" class="auto-login-cd"/>选修 </label>
+                                <!--<input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="必修/选修">-->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                            <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                            <button type="button" id="btn_update" class="btn btn-primary display" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>提交</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="txt_parentdepartment">课程描述</label>
-                        <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="上级部门">
-                    </div>
-                    <div class="form-group">
-                        <label for="txt_departmentlevel">学分</label>
-                        <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="部门级别">
-                    </div>
-                    <div class="form-group">
-                        <label for="txt_statu">描述</label>
-                        <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="状态">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                    <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
                 </div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
+
+    <!--<iframe th:replace="CourseInfoManage/CourseInfo::html" id="mainFrame" name="mainFrame"
+            frameborder="0" width="100%"  height="100%" frameBorder="0">
+    </iframe>-->
+</div>
+
+<!-- 底部页脚部分 -->
+<!--<div th:include="common::commonFooter"></div>-->
+<!--引入bootstrap table-->
+<link rel="stylesheet" th:href="@{/css/bootstrap-table.min.css}" />
+<link rel="stylesheet" th:href="@{/css/CourseInfoManage/courseInfo.css}" />
+<!-- bootstrap-table.min.js -->
+<script type="text/javascript" th:src="@{/js/bootstrap-table.min.js}"></script>
+<!-- 引入中文语言包 -->
+<script type="text/javascript" th:src="@{/js/bootstrap-table-zh-CN.min.js}"></script>
+<!--引入自定义js-->
+<script type="text/javascript" th:src="@{/js/CourseInfoManage/CourseInfo.js}"></script>
 </body>
 </html>

@@ -47,7 +47,7 @@ $("#user_login_btn").click(function(){
 					//如果放在静态static下静态页面就可以直接这样子跳页面:window.location.href = "signin.html";
 					//但是在templates下必须经过请求否则就会暴露页面不安全
 					//跳转到登录页面
-					window.location.href = "http://localhost:8080/welcome";
+					window.location.href = "http://localhost:8080/index";
 				}else{
 					alert(msg.msg.msg);
 					//显示账号错误信息

@@ -1,5 +1,6 @@
 package com.cms.controller;
 
+import com.cms.entity.Course;
 import com.cms.entity.CourseInfo;
 import com.cms.entity.custom.PageEntity;
 import com.cms.service.CourseInfoService;
@@ -55,6 +56,12 @@ public class CourseInfoController {
     @RequestMapping("/delById")
     public MsgUtil delById(int id){
         return courseInfoService.deleteByPrimaryKey(id) == 1 ? MsgUtil.success() : MsgUtil.error();
+    }
+
+    @ResponseBody
+    @RequestMapping("/selectByID")
+    public CourseInfo selectByID(int id){
+        return courseInfoService.selectByPrimaryKey(id);
     }
 
 

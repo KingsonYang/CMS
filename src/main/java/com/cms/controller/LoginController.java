@@ -126,6 +126,11 @@ public class LoginController {
             return "welcome";
     }
 
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
+    }
+
     /**
      * 退出登录
      * @param request

@@ -25,6 +25,10 @@ public class CourseInfoService {
         return courseInfoMapper.updateByPrimaryKey(courseInfo);
     }
 
+    public CourseInfo selectByPrimaryKey(int id){
+        return courseInfoMapper.selectByPrimaryKey(id);
+    }
+
     public List<CourseInfo> selectAll(CourseInfo courseInfo){
         return courseInfoMapper.selectAll(courseInfo);
     }
