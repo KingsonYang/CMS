@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.3.1 (64 bit)
-MySQL - 5.7.24-log : Database - CMS
+MySQL - 5.6.20 : Database - cms
 *********************************************************************
 */
 
@@ -12,16 +12,16 @@ MySQL - 5.7.24-log : Database - CMS
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`CMS` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`cms` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `CMS`;
+USE `cms`;
 
 /*Table structure for table `class_info` */
 
 DROP TABLE IF EXISTS `class_info`;
 
 CREATE TABLE `class_info` (
-  `ID` int(11) NOT NULL,
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `School_Name` varchar(20) NOT NULL,
   `Dept_Name` varchar(20) NOT NULL,
   `Class_Name` varchar(20) DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `class_info` (
   `Create_Time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `Update_Time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='班级信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='班级信息表';
 
 /*Data for the table `class_info` */
 
@@ -95,7 +95,7 @@ CREATE TABLE `course_info` (
   `credit` double(3,1) NOT NULL COMMENT '学分',
   `Character` int(1) DEFAULT NULL COMMENT '课程性质(1.必修课/2.公选课)',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 /*Data for the table `course_info` */
 
@@ -114,8 +114,7 @@ insert  into `course_info`(`ID`,`Name`,`Dec`,`credit`,`Character`) values
 (12,'数学建模','从入门到放弃',5.0,1),
 (13,'数学教学论','从入门到放弃',5.0,1),
 (14,'教育概论','从入门到放弃',5.0,1),
-(15,'学习心理学','从入门到放弃',5.0,1),
-(16,'古典音乐鉴赏','xxx',2.0,2);
+(15,'学习心理学','从入门到放弃',5.0,1);
 
 /*Table structure for table `role` */
 
@@ -126,7 +125,7 @@ CREATE TABLE `role` (
   `Name` varchar(20) DEFAULT NULL,
   `Descript` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `role` */
 
@@ -134,7 +133,8 @@ insert  into `role`(`ID`,`Name`,`Descript`) values
 (1,'spuer_admin','超级管理员'),
 (2,'admin','管理员'),
 (3,'teacher','教职工'),
-(4,'student','学生');
+(4,'student','学生'),
+(5,'tourist','游客');
 
 /*Table structure for table `score` */
 
@@ -170,7 +170,7 @@ CREATE TABLE `student` (
   KEY `学生` (`Stu_ID`),
   KEY `学生所属班级` (`Class_ID`),
   CONSTRAINT `学生` FOREIGN KEY (`Stu_ID`) REFERENCES `user` (`ID`),
-  CONSTRAINT `学生所属班级` FOREIGN KEY (`Class_ID`) REFERENCES `class_info` (`ID`)
+  CONSTRAINT `所在班级` FOREIGN KEY (`Class_ID`) REFERENCES `class_info` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生表';
 
 /*Data for the table `student` */
@@ -203,7 +203,7 @@ CREATE TABLE `user` (
 insert  into `user`(`ID`,`Name`,`Password`,`Sex`,`Age`,`PhoneNo`,`Email`,`Role_ID`,`Create_Time`,`Update_Time`) values 
 (1,'admin','202cb962ac59075b964b07152d234b70','男',18,'15151936139','1311399510@qq.com',2,'2018/12/28 16:47','2019-01-29 19:47:55'),
 (180101,'杨大仙','202cb962ac59075b964b07152d234b70','男',20,NULL,NULL,3,NULL,NULL),
-(20180101,'乔璐','202cb962ac59075b964b07152d234b70','女',18,NULL,NULL,4,'2018-09-13 12:00:00',NULL),
+(20180101,'乔璐','81dc9bdb52d04dc20036dbd8313ed055','女',18,NULL,NULL,4,'2018-09-13 12:00:00','2019-04-16 13:37:10'),
 (20180102,'陶哲浩','f5bb0c8de146c67b44babbf4e6584cc0',NULL,NULL,NULL,NULL,4,NULL,NULL),
 (20180103,'严飞杨','f5bb0c8de146c67b44babbf4e6584cc0',NULL,NULL,NULL,NULL,4,NULL,NULL),
 (20180104,'张天昊','f5bb0c8de146c67b44babbf4e6584cc0',NULL,NULL,NULL,NULL,4,NULL,NULL),
