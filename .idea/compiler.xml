@@ -9,10 +9,8 @@
         <module name="CMS" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="CMS" options="-parameters" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="CMS" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

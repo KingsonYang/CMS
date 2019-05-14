@@ -62,16 +62,16 @@ $("#user_login_btn").click(function(){
 });
 
     function changeLoginbtn() {
-        var username = document.getElementById('id').value;
-        var password = document.getElementById('password').value;
+        var username = document.getElementById('login_name').value;
+        var password = document.getElementById('login_password').value;
         if (username != "" && password != "") {
-            document.getElementById('loginbtn').removeAttribute("class");
-            document.getElementById('loginbtn').setAttribute("class","btn-current-big btn-default-main");
-            document.getElementById('loginbtn').removeAttribute("disabled");
+            document.getElementById('user_login_btn').removeAttribute("class");
+            document.getElementById('user_login_btn').setAttribute("class","btn-current-big btn-default-main");
+            document.getElementById('user_login_btn').removeAttribute("disabled");
         }else{
-            document.getElementById('loginbtn').removeAttribute("class");
-            document.getElementById('loginbtn').setAttribute("disabled","disabled");
-            document.getElementById('loginbtn').setAttribute("class","btn-current-big btn-disabled");
+            document.getElementById('user_login_btn').removeAttribute("class");
+            document.getElementById('user_login_btn').setAttribute("disabled","disabled");
+            document.getElementById('user_login_btn').setAttribute("class","btn-current-big btn-disabled");
         }
     }
 });

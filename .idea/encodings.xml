@@ -1,26 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+  <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/db/mysql/cms.sql" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/db/mysql/CMS.sql" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/AdminLTE.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/AdminLTE.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/admin.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/adminlte.css.map" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/adminlte.min.css.map" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/alt" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/animate.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/animate.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-colorpicker.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-colorpicker.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-datepicker.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-datepicker.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-datepicker.standalone.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-datepicker3.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-datepicker3.standalone.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-table.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-timepicker.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/bootstrap-timepicker.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/daterangepicker.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/font-awesome.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/font-awesome.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/iCheck" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/ionicons.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/ionicons.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/metroStyle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/pace.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/pace.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/select2.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/select2.min.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/skins" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/ztree/metroStyle" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/fonts" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/images" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap-table-zh-CN.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap-table.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap.min.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap.min.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/html5.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/html5.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery-ui.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery-ui.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery.nouislider.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery.nouislider.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery.nouislider.min.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/jquery.nouislider.min.js" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/js/respond.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/respond.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/templates/index.html" charset="GBK" />
   </component>

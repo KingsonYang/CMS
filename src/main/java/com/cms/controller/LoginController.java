@@ -6,6 +6,7 @@ import com.cms.util.DateUtil;
 import com.cms.util.MsgUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,9 +36,12 @@ public class LoginController {
         return "login";
     }
 
+
     @RequestMapping("/cms")
-    public String cms(){
-        return "list";
+    public String cms(Model model){ //返回给前台列表信息
+
+
+        return "base/main";
     }
 
     @ResponseBody
