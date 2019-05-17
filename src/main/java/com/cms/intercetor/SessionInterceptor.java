@@ -22,11 +22,11 @@ public class SessionInterceptor implements WebMvcConfigurer {
     //注册拦截器
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        List list = new ArrayList();
-        list.add("/**");
+//        List list = new ArrayList();
+//        list.add("/**");
 
 //        registry.addInterceptor(new UserInterceptor()).addPathPatterns("/**").excludePathPatterns(list);
-        registry.addInterceptor(new UserInterceptor()).excludePathPatterns("/**");
+//        registry.addInterceptor(new UserInterceptor()).excludePathPatterns("/**");
 
     }
 }

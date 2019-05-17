@@ -4,19 +4,21 @@
 
   <resultMap id="BaseResultMap" type="com.cms.entity.User">
     <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
     <result column="Sex" jdbcType="CHAR" property="sex" />
     <result column="Age" jdbcType="INTEGER" property="age" />
     <result column="PhoneNo" jdbcType="VARCHAR" property="phoneno" />
     <result column="Email" jdbcType="VARCHAR" property="email" />
-    <result column="Role_ID" jdbcType="INTEGER" property="roleId" />
+    <result column="Role_IDs" jdbcType="VARCHAR" property="roleIds" />
     <result column="Create_Time" jdbcType="VARCHAR" property="createTime" />
     <result column="Update_Time" jdbcType="VARCHAR" property="updateTime" />
   </resultMap>
 
   <!--用来接收userinfo的map-->
-  <resultMap id="UserInfoResultMap" type="com.cms.entity.custom.UserInfo">
+  <!--<resultMap id="UserInfoResultMap" type="com.cms.entity.custom.UserInfo">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="Sex" jdbcType="CHAR" property="sex" />
@@ -28,9 +30,9 @@
     <result column="Class_Name" jdbcType="VARCHAR" property="className" />
     <result column="Class_ShortName" jdbcType="VARCHAR" property="classShortname" />
     <result column="Create_Time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
+  </resultMap>-->
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
     where ID = #{id,jdbcType=INTEGER}
   </delete>
@@ -83,7 +85,7 @@
     SELECT u.id,u.name,u.sex,u.age,u.phoneno,u.email,c.school_name,c.dept_name,c.class_name,c.Class_ShortName,c.create_time
     FROM USER u,student s , class_info c
     WHERE u.id = s.stu_id AND s.class_id = c.id AND u.id = #{param1};
-  </select>
+  </select>-->
 
 
 </mapper>

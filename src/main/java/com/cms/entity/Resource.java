@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 /**
  * @author cjbi
  */
-@Table(name = "sys_resource")
+@Table(name = "resource")
 public class Resource {
 
     /**

@@ -1,77 +1,41 @@
 package com.cms.service;
 
+import com.cms.base.exception.BizException;
+import com.cms.base.service.IService;
 import com.cms.entity.User;
-import com.cms.dao.UserMapper;
-import com.cms.entity.custom.UserInfo;
-import com.cms.util.ConfUtil;
-import com.cms.util.DateUtil;
-import com.cms.util.MD5Util;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Set;
 
 /**
- * @Author:yqs
- * @Date: 2018/12/27
- * @Time: 20:45
+ * Created by hs on 2019.5.14.
  */
-@Service
-public class UserService{
-
-    @Autowired
-    UserMapper userMapper;
-
-    @Autowired
-    private ConfUtil confUtil;
-
-    public List<User> selectAll(){
-        return userMapper.selectAll();
-    }
-
-    public User selectById(int id){
-        return userMapper.selectByPrimaryKey(id);
-    }
-
-    public boolean checkName(String username){
-        return userMapper.checkByName(username) != null ? true : false;
-    }
+public interface UserService extends IService<User>{
 
     /**
-     * 登陆
-     * @param id
-     * @param passWord
-     * @param role_id
-     * @return
-     */
-    public User login(int id, String passWord,int role_id) {
-        return userMapper.login(id,MD5Util.getMD5(passWord.getBytes()),role_id);
-    }
-
-    @Transactional
-    public int register(User user) {
-        user.setPassword(MD5Util.getMD5(confUtil.getDefault_pwd().getBytes()));
-        return userMapper.insert(user);
-    }
-
-    /**
-     * 根据主键修改密码
+     * 创建用户
      * @param user
-     * @return
      */
-    public int new_password(User user){
-        user.setUpdateTime(DateUtil.getCurrTime());
-        user.setPassword(MD5Util.getMD5(user.getPassword().getBytes()));
-        return userMapper.updateByPrimaryKey(user);
-    }
+    void createUser(User user) throws BizException;
 
     /**
-     * 查询用户所有信息
+     * 修改密码
+     * @param userId
+     * @param newPassword
      */
-    public UserInfo getUserInfo(Integer id){
-        return userMapper.selectUserInfoByID(id);
-    }
+    void changePassword(Long userId, String newPassword);
+
+    /**
+     * 根据用户名查找其角色
+     * @param username
+     * @return
+     */
+    Set<String> queryRoles(String username);
 
 
+    /**
+     * 根据用户名查找其权限
+     * @param username
+     * @return
+     */
+    Set<String> queryPermissions(String username);
 }

@@ -1,12 +1,20 @@
 server:
   port: 8080
-
+  servlet:
+    context-path: /cms
 spring:
   datasource:
     username: root
     password: 123456
     url: jdbc:mysql://localhost:3306/cms?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
+    druid:
+          initial-size: 1
+          max-active: 20
+          min-idle: 1
+          stat-view-servlet:
+            allow: true
+          test-on-borrow: true
   thymeleaf:
       cache: false
       prefix: classpath:/templates/
@@ -42,6 +50,9 @@ pagehelper:
   params: count=countSql
 #############################
 
+password: #shiro
+  algorithmName: md5
+  hashIterations: 2
 
 #############################
 ######用户自定义参数#########

@@ -1,29 +1,87 @@
 package com.cms.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-public class User implements Serializable {
+@Table(name = "user")
+public class User {
+
+
+    /**
+     * 编号
+     */
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = UserUpdateChecks.class)
     private Integer id;
+
+    @NotNull(message = "用户名不能为空")
+    @Min(value = 3, message = "用户名不能低于3位")
+    private String username;
+
+    @NotNull(message = "用户名不能为空")
+    @Min(value = 3, message = "用户名不能低于3位")
     private String name;
+
+
+    @NotBlank(message = "密码不能为空", groups = UserCreateChecks.class)
+    @Min(value = 6, message = "密码不能低于6位", groups = UserCreateChecks.class)
     private String password;
+
+    /**
+     * 加密密码的盐
+     */
+    private String salt;
     private String sex;
     private Integer age;
     private String phoneno;
     private String email;
-    private Integer roleId;
+    private String roleIds;
     private String createTime;
     private String updateTime;
 
-    private static final long serialVersionUID = 1L;
+    public interface UserCreateChecks {
+
+    }
+
+    public interface UserUpdateChecks {
+
+    }
+
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getCredentialsSalt() {
+        return username + salt;
+    }
+
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public User setId(Integer id) {
         this.id = id;
+        return this;
     }
 
+    public String getUsername(){
+        return username;
+    }
+
+    public User setUsername(String username){
+        this.username = username;
+        return this;
+    }
     public String getName() {
         return name;
     }
@@ -32,12 +90,23 @@ public class User implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
+
+
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public User setSalt(String salt) {
+        this.salt = salt;
+        return this;
     }
 
     public String getSex() {
@@ -72,12 +141,13 @@ public class User implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public Integer getRoleId() {
-        return roleId;
+    public String getRoleIds() {
+        return roleIds;
     }
 
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
+    public User setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
+        return this;
     }
 
     public String getCreateTime() {
@@ -109,10 +179,9 @@ public class User implements Serializable {
         sb.append(", age=").append(age);
         sb.append(", phoneno=").append(phoneno);
         sb.append(", email=").append(email);
-        sb.append(", roleId=").append(roleId);
+        sb.append(", roleId=").append(roleIds);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

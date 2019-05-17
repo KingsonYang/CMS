@@ -1,6 +1,20 @@
 $(function(){
 
-/*回车键绑定登陆按钮*/
+
+	$("#user_login_btn").click(function () {
+        var err = $("#err").val();
+        console.log("123"+err);
+        if ("" != err && null != err){
+            $("#pass-error-tips").removeClass("hide");
+        }else {
+            $("#pass-error-tips").addClass("hide");
+
+        }
+    });
+
+
+
+/*/!*回车键绑定登陆按钮*!/
 $(document).keydown(function(event){
     if(event.keyCode==13){
         $("#user_login_btn").click();
@@ -9,13 +23,13 @@ $(document).keydown(function(event){
 
 var radio = $('input[type=radio][name=user]:checked').val();
 
-/*单选按钮改变*/
+/!*单选按钮改变*!/
 $('input[type=radio][name=user]').change(function() {
         radio = this.value;
         console.log(radio);
 });
 
-/*点击登陆*/
+/!*点击登陆*!/
 $("#user_login_btn").click(function(){
 
     console.log(radio);
@@ -73,5 +87,5 @@ $("#user_login_btn").click(function(){
             document.getElementById('user_login_btn').setAttribute("disabled","disabled");
             document.getElementById('user_login_btn').setAttribute("class","btn-current-big btn-disabled");
         }
-    }
+    }*/
 });
