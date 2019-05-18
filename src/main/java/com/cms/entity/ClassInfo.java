@@ -2,17 +2,25 @@ package com.cms.entity;
 
 import com.cms.entity.custom.BaseEntity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ClassInfo extends BaseEntity implements Serializable{
+@Table(name = "class_info")
+public class ClassInfo implements Serializable{
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = CourseInfo.UserUpdateChecks.class)
     private Integer id;
+
     private String schoolName;
     private String deptName;
     private String className;
     private String classShortname;
-    private String createTime;
-    private String updateTime;
+
 
     private static final long serialVersionUID = 1L;
 
@@ -21,56 +29,45 @@ public class ClassInfo extends BaseEntity implements Serializable{
         return id;
     }
 
-    public void setId(Integer id) {
+    public ClassInfo setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getSchoolName() {
         return schoolName;
     }
 
-    public void setSchoolName(String schoolName) {
+    public ClassInfo setSchoolName(String schoolName) {
         this.schoolName = schoolName == null ? null : schoolName.trim();
+        return this;
     }
 
     public String getDeptName() {
         return deptName;
     }
 
-    public void setDeptName(String deptName) {
+    public ClassInfo setDeptName(String deptName) {
         this.deptName = deptName == null ? null : deptName.trim();
+        return this;
     }
 
     public String getClassName() {
         return className;
     }
 
-    public void setClassName(String className) {
+    public ClassInfo setClassName(String className) {
         this.className = className == null ? null : className.trim();
+        return this;
     }
 
     public String getClassShortname() {
         return classShortname;
     }
 
-    public void setClassShortname(String classShortname) {
+    public ClassInfo setClassShortname(String classShortname) {
         this.classShortname = classShortname == null ? null : classShortname.trim();
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
+        return this;
     }
 
     @Override
@@ -84,8 +81,6 @@ public class ClassInfo extends BaseEntity implements Serializable{
         sb.append(", deptName=").append(deptName);
         sb.append(", className=").append(className);
         sb.append(", classShortname=").append(classShortname);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

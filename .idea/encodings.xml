@@ -28,7 +28,6 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css/iCheck" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css/ionicons.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css/ionicons.min.css" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/static/css/metroStyle" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css/pace.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css/pace.min.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css/select2.css" charset="UTF-8" />
@@ -37,6 +36,7 @@
     <file url="file://$PROJECT_DIR$/src/main/resources/static/css/ztree/metroStyle" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/fonts" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/images" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/static/images/error-tips.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap-table-zh-CN.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap-table.min.js" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/main/resources/static/js/bootstrap.min.js" charset="GBK" />

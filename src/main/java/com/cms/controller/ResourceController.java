@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * @author cjbi
+ * @author yang
  */
 @Controller
 @RequestMapping("/resource")

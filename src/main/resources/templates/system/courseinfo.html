@@ -13,13 +13,13 @@
 <!-- Content Header (Page header) -->
 <section class="content-header" style="">
     <h1>
-        角色管理
-        <small>用户的角色管理页面</small>
+        课程管理
+        <small>用户的课程管理页面</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-        <li><a href="#">用户管理</a></li>
-        <li class="active">角色管理</li>
+        <li><a href="#">系统管理</a></li>
+        <li class="active">课程管理</li>
     </ol>
 </section>
 
@@ -32,10 +32,10 @@
                     <div id="toolbar">
                         <form class="form-inline" id="searchForm">
                             <div class="form-group">
-                                <label for="searchRole">角色名称</label>
-                                <input type="text" class="form-control input-sm" name="role" id="searchRole" placeholder="请输入角色名称">
-                                <label for="searchDescription">角色描述</label>
-                                <input type="text" class="form-control input-sm" name="description" id="searchDescription" placeholder="请输入角色描述">
+                                <label for="searchId">课程编号</label>
+                                <input type="text" class="form-control input-sm" name="id" id="searchId" placeholder="请输入课程编号">
+                                <label for="searchName">课程名称</label>
+                                <input type="text" class="form-control input-sm" name="name" id="searchName" placeholder="请输入课程名称">
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm" onclick="javascript:$('table').bootstrapTable('refresh', {silent: true});">
@@ -50,17 +50,17 @@
                         </form>
                         <div class="btn-group btn-group-sm">
                             <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                            <button shiro:hasPermission="role:create" type="button" id="addBtn" class="btn btn-default" data-toggle="modal"
+                            <button shiro:hasPermission="courseinfo:create" type="button" id="addBtn" class="btn btn-default" data-toggle="modal"
                                     data-target="#addModal" data-action="{before:'addBefore'}"><i class="glyphicon glyphicon glyphicon-plus"></i> 新增
                             </button>
                             <!-- Indicates caution should be taken with this action -->
-                            <button shiro:hasPermission="role:update" type="button" id="editBtn" class="btn btn-default" data-toggle="modal"
+                            <button shiro:hasPermission="courseinfo:update" type="button" id="editBtn" class="btn btn-default" data-toggle="modal"
                                     data-target="#editModal"
                                     data-action="{type:'editable',form:'#editForm',table:'#table',after:'editAfter'}"
                                     disabled><i class="glyphicon glyphicon glyphicon-edit"></i> 修改
                             </button>
                             <!-- Indicates a dangerous or potentially negative action -->
-                            <button shiro:hasPermission="role:delete" type="button" id="deleteBtn" class="btn btn-default" data-toggle="modal"
+                            <button shiro:hasPermission="courseinfo:delete" type="button" id="deleteBtn" class="btn btn-default" data-toggle="modal"
                                     data-target="#deleteModal"
                                     data-action="{type:'delete',form:'#deleteForm',idField:'id',table:'#table'}" disabled><i
                                     class="glyphicon glyphicon-remove"></i> 删除
@@ -87,32 +87,43 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="addModalLabel">添加角色</h4>
+                <h4 class="modal-title" id="addModalLabel">添加课程</h4>
             </div>
             <div class="modal-body">
                 <form id="addForm">
                     <div class="form-group">
-                        <label class="control-label" for="role"><span class="asterisk">*</span>角色名:</label>
-                        <input id="role" type="text" class="form-control" name="role" placeholder="输入角色名" minlength="2" required>
+                        <label class="control-label" for="courseinfo_id"><span class="asterisk">*</span>课程编号:</label>
+                        <input id="courseinfo_id" type="text" class="form-control" name="id" placeholder="输入课程名" minlength="2" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="description">角色描述:</label>
-                        <input id="description" type="text" class="form-control" name="description" placeholder="输入角色描述">
+                        <label class="control-label" for="courseinfo_name"><span class="asterisk">*</span>课程名:</label>
+                        <input id="courseinfo_name" type="text" class="form-control" name="name" placeholder="输入课程名" minlength="2" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="resourceIds"><span class="asterisk">*</span>拥有的资源列表:</label>
-                        <input type="hidden" id="resourceIds" name="resourceIds" required>
-                        <input type="text" class="form-control" id="resourceName" name="resourceNames" readonly required>
+                        <label class="control-label" for="courseinfo_description">课程描述:</label>
+                        <input id="courseinfo_description" type="text" class="form-control" name="description" placeholder="输入课程描述">
                         <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="courseinfo_credit">学分:</label>
+                        <input id="courseinfo_credit" type="text" class="form-control" name="credit" placeholder="输入学分" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="courseinfo_character">课程性质:</label>
+                        <select class="form-control" name="act" id="courseinfo_character">
+                            <option value="1">必修课</option>
+                            <option value="2">选修课</option>
+                        </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="submit" form="addForm" class="btn btn-primary"
-                        data-action="{type:'submit',form:'#addForm',url:'@{/role/create}',after:'$.myAction.refreshTable'}">
+                        data-action="{type:'submit',form:'#addForm',url:'@{/courseinfo/create}',after:'$.myAction.refreshTable'}">
                     确定
                 </button>
             </div>
@@ -126,33 +137,44 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="editModalLabel">修改角色</h4>
+                <h4 class="modal-title" id="editModalLabel">修改课程</h4>
             </div>
             <div class="modal-body">
                 <form id="editForm">
-                    <input type="hidden" name="id"/>
+                    <!--<input type="hidden" name="id"/>-->
                     <div class="form-group">
-                        <label class="control-label" for="role"><span class="asterisk">*</span>角色名:</label>
-                        <input id="editRole" type="text" class="form-control" name="role" placeholder="输入角色名" minlength="2" required>
+                        <label class="control-label" for="id"><span class="asterisk">*</span>课程编号:</label>
+                        <input id="id" type="text" class="form-control" name="id" placeholder="输入课程名" minlength="2"  readonly required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="description">角色描述:</label>
-                        <input id="editDescription" type="text" class="form-control" name="description" placeholder="输入角色描述">
+                        <label class="control-label" for="name"><span class="asterisk">*</span>课程名:</label>
+                        <input id="name" type="text" class="form-control" name="name" placeholder="输入课程名" minlength="2" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="resourceIds"><span class="asterisk">*</span>拥有的资源列表:</label>
-                        <input type="hidden" id="editResourceIds" name="resourceIds" required>
-                        <input type="text" class="form-control" id="editResourceName" name="resourceNames" readonly required>
+                        <label class="control-label" for="description">课程描述:</label>
+                        <input id="description" type="text" class="form-control" name="description" placeholder="输入课程描述">
                         <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="credit">学分:</label>
+                        <input id="credit" type="text" class="form-control" name="credit" placeholder="输入课程学分" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="act">课程性质:</label>
+                        <select class="form-control" name="act" id="act">
+                            <option value="1">必修课</option>
+                            <option value="2">选修课</option>
+                        </select>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="submit" form="editForm" class="btn btn-primary"
-                        data-action="{type:'submit',form:'#editForm',url:'@{/role/update}',after:'$.myAction.refreshTable'}">
+                        data-action="{type:'submit',form:'#editForm',url:'@{/courseinfo/update}',after:'$.myAction.refreshTable'}">
                     确定
                 </button>
             </div>
@@ -165,7 +187,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="deleteSmallModalLabel">删除角色</h4>
+                <h4 class="modal-title" id="deleteSmallModalLabel">删除课程</h4>
             </div>
             <div class="modal-body">
                 <form id="deleteForm"></form>
@@ -174,7 +196,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="button" form="deleteForm" class="btn btn-primary"
-                        data-action="{type:'submit',form:'#deleteForm',url:'@{/role/delete-batch}',after:'$.myAction.refreshTable'}">
+                        data-action="{type:'submit',form:'#deleteForm',url:'@{/courseinfo/delete}',after:'$.myAction.refreshTable'}">
                     确定
                 </button>
             </div>
@@ -183,8 +205,8 @@
 </div>
 <div id="actionButtons" class="admin-hide">
     <!--<a class="like" href="javascript:void(0)" data-toggle="tooltip" title="Like"><i class="glyphicon glyphicon-heart"></i></a>　-->
-    <a shiro:hasPermission="role:update" class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>　
-    <a shiro:hasPermission="role:delete" class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="删除"><i class="glyphicon glyphicon-remove"></i></a>　
+    <a shiro:hasPermission="courseinfo:update" class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>　
+    <a shiro:hasPermission="courseinfo:delete" class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="删除"><i class="glyphicon glyphicon-remove"></i></a>　
 </div>
 <!-- zTree -->
 <div id="menuContent" class="menuContent" style="display:none;z-index:1989101600;position: absolute;">
@@ -198,15 +220,25 @@
         // bootstrap table初始化
         // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
         $table.bootstrapTable({
-            url: CONTEXT_PATH + '/role/list',
+            url: CONTEXT_PATH + '/courseinfo/list',
             idField: 'id',
             searchOnEnterKey: false,
             columns: [
                 {field: 'state', checkbox: true},
                 {field: 'id', title: '编号', sortable: true, halign: 'left'},
-                {field: 'role', title: '角色名称', sortable: true, halign: 'left'},
-                {field: 'description', title: '角色描述', sortable: true, halign: 'left'},
-                {field: 'resourceNames', title: '拥有的资源', sortable: false, halign: 'left'},
+                {field: 'name', title: '课程名称', sortable: true, halign: 'left'},
+                {field: 'description', title: '课程描述', sortable: true, halign: 'left'},
+                {field: 'credit', title: '学分', sortable: false, halign: 'left'},
+                {field: 'act', title: '课程性质', sortable: false, halign: 'left',
+                    formatter: function (value, row, index){ // 单元格格式化函数
+                        var text = '-';
+                        if (value == 1) {
+                            text = "必修课";
+                        } else if (value == 2) {
+                            text = "选修课";
+                        }
+                        return text;
+                    }},
                 {
                     field: 'action',
                     title: '操作',
@@ -229,22 +261,10 @@
         return html.join('');
     }
 
-    function addBefore(obj) {
-        $.fn.zTree.getZTreeObj("tree").destroy();
-        $.fn.zTree.init($("#tree"), setting, zNodes);
-    }
-
-    function editAfter(obj, row) {
-        var treeObj = $.fn.zTree.getZTreeObj("tree");
-        treeObj.destroy();
-        $.fn.zTree.init($("#tree"), setting, zNodes);
-        treeObj.expandAll(true);
-    }
-
     function actionFormatter(value, row, index) {
         return $('#actionButtons').html();
     }
-
+    /*每条数据后面的操作按钮时间*/
     window.actionEvents = {
         'click .like': function (e, value, row, index) {
             alert('You click like icon, row: ' + JSON.stringify(row));
@@ -266,89 +286,5 @@
         }
     };
 
-    var setting = {
-        check: {
-            enable: true,
-            chkboxType: {"Y": "", "N": ""}
-        },
-        view: {
-            dblClickExpand: false
-        },
-        data: {
-            simpleData: {
-                enable: true
-            }
-        },
-        callback: {
-            onCheck: onCheck
-        }
-    };
-    var resourceList = [[${resourceList}]];
-    var zNodes = [];
-    for (var i in resourceList) {
-        zNodes.push({id: resourceList[i].id, pId: resourceList[i].parentId, name: resourceList[i].name});
-    }
-
-    function onCheck(e, treeId, treeNode) {
-        var zTree = $.fn.zTree.getZTreeObj("tree"),
-            nodes = zTree.getCheckedNodes(true),
-            id = "",
-            name = "";
-        nodes.sort(function compare(a, b) {
-            return a.id - b.id;
-        });
-        for (var i = 0, l = nodes.length; i < l; i++) {
-            id += nodes[i].id + ",";
-            name += nodes[i].name + ",";
-        }
-        if (id.length > 0) id = id.substring(0, id.length - 1);
-        if (name.length > 0) name = name.substring(0, name.length - 1);
-        $("#resourceIds").val(id);
-        $("#resourceName").val(name);
-        $("#editResourceIds").val(id);
-        $("#editResourceName").val(name);
-        // hideMenu();
-    }
-
-    function showMenu() {
-        var treeObj = $.fn.zTree.getZTreeObj("tree");
-        var cityObj = $("#resourceName");
-        var cityOffset = $("#resourceName").offset();
-        $("#menuContent").css({left: cityOffset.left + "px", top: cityOffset.top + cityObj.outerHeight()}).slideDown("fast");
-
-        $("body").bind("mousedown", onBodyDown);
-    }
-
-    function showMenuOfEdit() {
-        var resourceIds = $('#editResourceIds').val();
-        var resourceIdList = resourceIds.split(',');
-        var treeObj = $.fn.zTree.getZTreeObj("tree");
-        for (var i in resourceIdList) {
-            var id = resourceIdList[i];
-            var node = treeObj.getNodeByParam("id", id, null);
-            if (node === null) continue;
-            treeObj.checkNode(node, true, true);
-        }
-        var cityObj = $("#editResourceName");
-        var cityOffset = $("#editResourceName").offset();
-        $("#menuContent").css({left: cityOffset.left + "px", top: cityOffset.top + cityObj.outerHeight()}).slideDown("fast");
-
-        $("body").bind("mousedown", onBodyDown);
-    }
-
-    function hideMenu() {
-        $("#menuContent").fadeOut("fast");
-        $("body").unbind("mousedown", onBodyDown);
-    }
-
-    function onBodyDown(event) {
-        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
-            hideMenu();
-        }
-    }
-
-    $.fn.zTree.init($("#tree"), setting, zNodes);
-    $("#resourceName").click(showMenu);
-    $("#editResourceName").click(showMenuOfEdit);
 </script>
 </html>

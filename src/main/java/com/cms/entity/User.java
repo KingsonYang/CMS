@@ -173,13 +173,14 @@ public class User {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", username=").append(username);
         sb.append(", name=").append(name);
         sb.append(", password=").append(password);
         sb.append(", sex=").append(sex);
         sb.append(", age=").append(age);
         sb.append(", phoneno=").append(phoneno);
         sb.append(", email=").append(email);
-        sb.append(", roleId=").append(roleIds);
+        sb.append(", roleIds=").append(roleIds);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append("]");

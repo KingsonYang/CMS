@@ -1,57 +1,78 @@
 package com.cms.entity;
 
-import com.cms.entity.custom.BaseEntity;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-import java.io.Serializable;
+@Table(name = "course_info")
+public class CourseInfo{
 
-public class CourseInfo extends BaseEntity implements Serializable {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = UserUpdateChecks.class)
     private Integer id;
-    private String name;
-    private String dec;
-    private Double credit;
-    private Integer character;
 
-    private static final long serialVersionUID = 1L;
+    private String name;
+    private String description;
+    private Double credit;
+    private Integer act;
+
+    public interface UserCreateChecks {
+
+    }
+
+    public interface UserUpdateChecks {
+
+    }
+
+    public CourseInfo(){
+
+    }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public CourseInfo setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public CourseInfo setName(String name) {
         this.name = name == null ? null : name.trim();
+        return this;
     }
 
-    public String getDec() {
-        return dec;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDec(String dec) {
-        this.dec = dec == null ? null : dec.trim();
+    public CourseInfo setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+        return this;
     }
 
     public Double getCredit() {
         return credit;
     }
 
-    public void setCredit(Double credit) {
+    public CourseInfo setCredit(Double credit) {
         this.credit = credit;
+        return this;
     }
 
-    public Integer getCharacter() {
-        return character;
+    public Integer getAct() {
+        return act;
     }
 
-    public void setCharacter(Integer character) {
-        this.character = character;
+    public CourseInfo setAct(Integer act) {
+        this.act = act;
+        return this;
     }
 
     @Override
@@ -62,10 +83,9 @@ public class CourseInfo extends BaseEntity implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
-        sb.append(", dec=").append(dec);
+        sb.append(", dec=").append(description);
         sb.append(", credit=").append(credit);
-        sb.append(", character=").append(character);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append(", character=").append(act);
         sb.append("]");
         return sb.toString();
     }
