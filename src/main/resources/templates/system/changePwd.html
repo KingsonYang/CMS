@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<style>
+    ul.ztree {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        height: 200px;
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header" style="">
+    <h1>
+        信息维护
+        <small>信息维护页面</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+        <li><a href="#">信息维护</a></li>
+        <li class="active">修改密码</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="toolbar">
+                        <!--<form class="form-inline" id="searchForm">-->
+                            <!--<div class="form-group">
+                                <label class="control-label" for="oldpPassword"><span class="asterisk">*</span>旧密码 :</label>
+                                <input type="password" id="oldpPassword" class="form-control" minlength="6"
+                                       name="password" placeholder="输入旧密码" required>
+                                <div class="help-block with-errors"></div>
+                            </div><br/>-->
+                            <div class="form-group">
+                                <label class="control-label" for="password"><span class="asterisk">*</span>新密码 :</label>
+                                <input type="password" id="password" class="form-control" minlength="6"
+                                       name="password" placeholder="输入新密码" required>
+                                <div class="help-block with-errors"></div>
+                            </div><br/>
+                            <div class="form-group">
+                                <label class="control-label" for="inputPasswordConfirm"><span
+                                        class="asterisk">*</span>确认密码:</label>
+                                <input type="password" class="form-control" id="inputPasswordConfirm" minlength="6"
+                                       data-match="#password" data-match-error="密码输入不一致。" name="chkpassowrd" placeholder="确认密码"
+                                       required>
+                                <div class="help-block with-errors"></div>
+                            </div><br/>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm" id="changePwd">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                    修改
+                                </button>
+                                <button type="reset" class="btn btn-default btn-sm">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    清空
+                                </button>
+                            </div>
+                        <!--</form>-->
+
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<script th:inline="javascript">
+
+    $(function () {
+
+        $("#changePwd").click(function () {
+            var password = $("#password").val();
+            $.ajax({
+                url:"/cms/updatePwd/update",
+                data:{"password":password},
+                type:"post",
+                success:function(msg){
+                    console.log(msg);
+                    if (msg.code == 200){
+                        alert("密码修改成功，请重新登录！");
+                        window.location.href = "http://localhost:8080/cms/logout";
+                    }
+                }
+            })
+        });
+
+       /* $("#old_password").blur(function(){
+            var password = $("#old_password").val();
+            $.ajax({
+                url:"/checkOldPwd",
+                data:{"password":password},
+                type:"post",
+                success:function(msg){
+                    if(msg.code==200){
+                        $("#error_msg_1").text("").show();
+                    }else if(msg.code==404){
+                        $("#error_msg_1").text("旧密码错误！").show();
+                        $("#old_password").focus();
+                    }
+                }
+            })
+        })*/
+
+    });
+
+
+
+
+</script>
+</html>

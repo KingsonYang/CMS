@@ -18,6 +18,12 @@ public interface UserService extends IService<User>{
     void createUser(User user) throws BizException;
 
     /**
+     * 检查旧密码
+     *
+     */
+    Boolean checkOldPwd(Long userId, String newPassword);
+
+    /**
      * 修改密码
      * @param userId
      * @param newPassword

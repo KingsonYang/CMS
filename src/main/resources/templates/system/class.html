@@ -32,10 +32,10 @@
                     <div id="toolbar">
                         <form class="form-inline" id="searchForm">
                             <div class="form-group">
-                                <label for="searchId">班级编号</label>
-                                <input type="text" class="form-control input-sm" name="id" id="searchId" placeholder="请输入班级编号">
-                                <label for="searchName">楼编号</label>
-                                <input type="text" class="form-control input-sm" name="floorNo" id="searchName" placeholder="请输入班级名称">
+                                <label for="searchdeptName">专业</label>
+                                <input type="text" class="form-control input-sm" name="deptName" id="searchdeptName" placeholder="请输入班级编号">
+                                <label for="searchclassName">班级</label>
+                                <input type="text" class="form-control input-sm" name="className" id="searchclassName" placeholder="请输入班级名称">
                             </div>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm" onclick="javascript:$('table').bootstrapTable('refresh', {silent: true});">
@@ -102,13 +102,13 @@
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="deptName">系别:</label>
-                        <input id="deptName" type="text" class="form-control" name="deptName" placeholder="输入系" required>
+                        <label class="control-label" for="deptName">学院:</label>
+                        <input id="deptName" type="text" class="form-control" name="deptName" placeholder="输入学院" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="className">班级:</label>
-                        <input id="className" type="text" class="form-control" name="className" placeholder="输入班级" required>
+                        <label class="control-label" for="className">专业:</label>
+                        <input id="className" type="text" class="form-control" name="className" placeholder="输入专业" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
@@ -151,12 +151,12 @@
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="UpdatedeptName">系别:</label>
+                        <label class="control-label" for="UpdatedeptName">学院:</label>
                         <input id="UpdatedeptName" type="text" class="form-control" name="deptName" placeholder="输入系" required>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="UpdateclassName">班级:</label>
+                        <label class="control-label" for="UpdateclassName">专业:</label>
                         <input id="UpdateclassName" type="text" class="form-control" name="className" placeholder="输入班级" required>
                         <div class="help-block with-errors"></div>
                     </div>
@@ -226,8 +226,8 @@
                 {field: 'id', title: '编号', sortable: true, halign: 'left'},
                 {field: 'schoolName', title: '学校', sortable: true, halign: 'left'},
                 {field: 'deptName', title: '系别', sortable: true, halign: 'left'},
-                {field: 'className', title: '班级', sortable: true, halign: 'left'},
-                {field: 'classShortname', title: '班级简称', sortable: false, halign: 'left'},
+                {field: 'className', title: '专业', sortable: true, halign: 'left'},
+                {field: 'classShortname', title: '班级', sortable: false, halign: 'left'},
                 {
                     field: 'action',
                     title: '操作',

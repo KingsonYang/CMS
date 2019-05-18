@@ -2,12 +2,9 @@ package com.cms.controller;
 
 import com.cms.base.controller.BaseController;
 import com.cms.dto.ResourceDto;
-import com.cms.entity.User;
 import com.cms.service.ResourceService;
 import com.cms.service.UserService;
-import com.cms.service.UserService;
 import com.cms.util.Constants;
-import com.cms.util.MsgUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -16,9 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

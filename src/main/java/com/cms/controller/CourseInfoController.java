@@ -2,17 +2,12 @@ package com.cms.controller;
 
 import com.cms.base.annotation.SystemLog;
 import com.cms.base.controller.BaseCrudController;
-import com.cms.entity.Course;
 import com.cms.entity.CourseInfo;
-import com.cms.entity.custom.PageEntity;
 import com.cms.service.CourseInfoService;
-import com.cms.util.MsgUtil;
 import com.cms.util.Result;
 import com.github.pagehelper.PageHelper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;

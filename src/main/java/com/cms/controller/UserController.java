@@ -86,7 +86,6 @@ public class UserController extends BaseCrudController<User>{
         return s.toString();
     }
 
-
     @ResponseBody
     @PostMapping("/create")
     @RequiresPermissions("user:create")

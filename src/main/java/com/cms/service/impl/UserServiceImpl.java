@@ -44,6 +44,12 @@ public class UserServiceImpl extends BaseService<User> implements UserService{
     }
 
     @Override
+    public Boolean checkOldPwd(Long userId, String Password){
+
+        return true;
+    }
+
+    @Override
     @Transactional
     public void changePassword(Long userId, String newPassword) {
         User user = userMapper.selectByPrimaryKey(userId);
