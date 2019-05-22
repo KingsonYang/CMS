@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<!-- Content Header (Page header) -->
+<section class="content-header" style="">
+    <h1>
+        成绩管理
+        <small>成绩管理页面</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+        <li><a href="#">信息查询</a></li>
+        <li class="active">成绩管理</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="toolbar">
+                        <form class="form-inline" id="searchForm">
+                            <div class="form-group">
+                                <label for="searchID"> 课程编号</label>
+                                <input type="text" class="form-control input-sm" name="course_id" id="searchID" placeholder="请输入用户名">
+                            </div>
+                            <div class="form-group">
+                                <label for="searchName"> 学号</label>
+                                <input type="text" class="form-control input-sm" name="stu_id" id="searchName" placeholder="请输入用户名">
+                            </div>
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-default" onclick="javascript:$('table').bootstrapTable('refresh', {silent: true});">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                    查询
+                                </button>
+                                <button type="reset" class="btn btn-default">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    清空
+                                </button>
+                            </div>
+                        </form>
+                        <div class="btn-group btn-group-sm">
+                            <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+                            <button shiro:hasPermission="score:create" type="button" id="addBtn" class="btn btn-default"
+                                    data-toggle="modal"
+                                    data-target="#addModal"><i class="glyphicon glyphicon-plus"></i> 新增
+                            </button>
+                            <!-- Indicates caution should be taken with this action -->
+                            <button shiro:hasPermission="score:update" type="button" id="editBtn" class="btn btn-default"
+                                    data-toggle="modal"
+                                    data-target="#editModal"
+                                    data-action="{type:'editable',form:'#editForm',table:'#table',after:'editAfter'}"
+                                    disabled><i class="glyphicon glyphicon-edit"></i> 修改
+                            </button>
+                            <!-- Indicates a dangerous or potentially negative action -->
+                            <button shiro:hasPermission="score:delete" type="button" id="deleteBtn" class="btn btn-default" data-toggle="modal"
+                                    data-target="#deleteModal"
+                                    data-action="{type:'delete',form:'#deleteForm',idField:'id',table:'#table'}"
+                                    disabled><i class="glyphicon glyphicon-remove"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                    <table id="table"></table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<!-- add Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="addModalLabel">添加信息</h4>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <div class="form-group">
+                        <label class="control-label" for="id"><span class="asterisk">*</span>编号:</label>
+                        <input id="id" type="text" class="form-control" name="id" placeholder="编号"
+                               minlength="1">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="courseId"><span class="asterisk">*</span>课程列表:</label>
+                        <select name="course_id" id="courseId" multiple class="form-control select2"
+                                data-placeholder="请从列表选择一项" required>
+                            <option th:each="course : ${courseList}" th:value="${course.id}" th:text="${course.name}">
+                                角色不存在
+                            </option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="stuId"><span class="asterisk">*</span>学生列表:</label>
+                        <select name="stu_id" id="stuId" multiple class="form-control select2"
+                                data-placeholder="请从列表选择一项" required>
+                            <option th:each="user : ${userList}" th:value="${user.id}" th:text="${user.username}">
+                                角色不存在
+                            </option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="score"><span class="asterisk">*</span>成绩:</label>
+                        <input id="score" type="text" class="form-control" name="score" placeholder="成绩"
+                               minlength="1">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="credit"><span class="asterisk">*</span>学分:</label>
+                        <input id="credit" type="text" class="form-control" name="credit" placeholder="学分"
+                               minlength="1">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" form="addForm" class="btn btn-primary"
+                        data-action="{type:'submit',form:'#addForm',url:'@{/score/create}',after:'$.myAction.refreshTable'}">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="editModalLabel">修改用户</h4>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <input type="hidden" name="id"/>
+                    <div class="form-group">
+                        <label class="control-label" for="editcourseId"><span class="asterisk">*</span>课程列表:</label>
+                        <select name="course_id" id="editcourseId" multiple class="form-control select2"
+                                data-placeholder="请从列表选择一项" required>
+                            <option th:each="course : ${courseList}" th:value="${course.id}" th:text="${course.name}">
+                                角色不存在
+                            </option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="editstuId"><span class="asterisk">*</span>学生列表:</label>
+                        <select name="stu_id" id="editstuId" multiple class="form-control select2"
+                                data-placeholder="请从列表选择一项" required>
+                            <option th:each="user : ${userList}" th:value="${user.id}" th:text="${user.username}">
+                                角色不存在
+                            </option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="editscore"><span class="asterisk">*</span>成绩:</label>
+                        <input id="editscore" type="text" class="form-control" name="score" placeholder="成绩"
+                               minlength="1">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="editcredit"><span class="asterisk">*</span>学分:</label>
+                        <input id="editcredit" type="text" class="form-control" name="credit" placeholder="学分"
+                               minlength="1">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" form="editForm" class="btn btn-primary"
+                        data-action="{type:'submit',form:'#editForm',url:'@{/score/update}',after:'$.myAction.refreshTable'}">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- delete modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteSmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="deleteSmallModalLabel">删除用户</h4>
+            </div>
+            <div class="modal-body">
+                <form id="deleteForm"></form>
+                确定要删除选中的 <span class="records"></span> 条记录?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" form="deleteForm" class="btn btn-primary"
+                        data-action="{type:'submit',form:'#deleteForm',url:'@{/score/delete-batch}',after:'$.myAction.refreshTable'}">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="actionButtons" class="admin-hide">
+    <!--<a class="like" href="javascript:void(0)" data-toggle="tooltip" title="Like"><i class="glyphicon glyphicon-heart"></i></a>　-->
+    <a shiro:hasPermission="score:update" class="edit ml10" href="javascript:void(0)" data-toggle="tooltip" title="编辑"><i class="glyphicon glyphicon-edit"></i></a>　
+    <a shiro:hasPermission="score:delete" class="remove ml10" href="javascript:void(0)" data-toggle="tooltip" title="删除"><i class="glyphicon glyphicon-remove"></i></a>　
+</div>
+<!-- zTree -->
+<div id="menuContent" class="menuContent"
+     style="display:none;z-index:1989101600;position: absolute;border: 1px solid #ccc; background-color: #fff;">
+    <ul id="tree" class="ztree"></ul>
+</div>
+<script th:inline="javascript">
+
+    var $table = $('#table');
+
+    $(function () {
+        // bootstrap table初始化
+        // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
+        $table.bootstrapTable({
+            url: CONTEXT_PATH + '/score/list',
+            idField: 'id',
+            search:true,
+            columns: [
+                {field: 'state', checkbox: true},
+                {field: 'id', title: '编号', sortable: true, halign: 'left'},
+                {field: 'coursename', title: '课程', sortable: true, halign: 'left'},
+                {field: 'stuname', title: '学生姓名', sortable: false, halign: 'left'},
+                {field: 'score', title: '成绩', sortable: false, halign: 'left'},
+                {field: 'credit', title: '学分', sortable: false, halign: 'left'},
+                {
+                    field: 'action',
+                    title: '操作',
+                    halign: 'center',
+                    align: 'center',
+                    formatter: 'actionFormatter',
+                    events: 'actionEvents',
+                    clickToSelect: false
+                }
+            ]
+        });
+    });
+
+    // 数据表格展开内容
+    function detailFormatter(index, row) {
+        var html = [];
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>');
+        });
+        return html.join('');
+    }
+
+    function editAfter(obj, row) {
+        var courseList = row.courseList;
+        var stuList = row.stuList;
+        for (i in courseList) {
+            var courseId = courseList[i];
+            $('#editForm').find('[name=course_id]').find('option[value=' + courseId + ']').prop('selected', true);
+        }
+        for(i in stuList) {
+            var stuId = stuList[i];
+            $('#editForm').find('[name=stu_id]').find('option[value=' + stuId + ']').prop('selected', true);
+        }
+    }
+
+    function actionFormatter(value, row, index) {
+        return $('#actionButtons').html();
+    }
+
+    window.actionEvents = {
+        'click .like': function (e, value, row, index) {
+            alert('You click like icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        },
+        'click .edit': function (e, value, row, index) {
+            $('#editModal').modal('show')
+            $('#editForm').fillForm(row);
+            editAfter('', row);
+            console.log(value, row, index);
+        },
+        'click .remove': function (e, value, row, index) {
+            $('#deleteModal').modal('show');
+            $('.records').html('1');
+            var html = '';
+            for (var key in row) {
+                html += '<input type="hidden" name="' + key + '" value="' + row[key] + '">';
+            }
+            $('#deleteForm').html(html);
+        }
+    };
+
+    var setting = {
+        view: {
+            dblClickExpand: false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            onClick: onClick
+        }
+    };
+    var stuList = [[${stuList}]];
+    var zNodes = [];
+    for (var i in stuList) {
+        zNodes.push({id: stuList[i].id, name: stuList[i].username});
+    }
+
+    function onClick(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("tree"),
+            nodes = zTree.getSelectedNodes(),
+            id = "",
+            name = "";
+        nodes.sort(function compare(a, b) {
+            return a.id - b.id;
+        });
+        for (var i = 0, l = nodes.length; i < l; i++) {
+            id += nodes[i].id + ",";
+            name += nodes[i].name + ",";
+        }
+        if (id.length > 0) id = id.substring(0, id.length - 1);
+        if (name.length > 0) name = name.substring(0, name.length - 1);
+        $("#organizationId").val(id);
+        $("#organizationName").val(name);
+        $("#editOrganizationId").val(id);
+        $("#editOrganizationName").val(name);
+        hideMenu();
+    }
+
+    function showMenu() {
+        var cityObj = $("#organizationName");
+        var cityOffset = $("#organizationName").offset();
+        $("#menuContent").css({
+            left: cityOffset.left + "px",
+            top: cityOffset.top + cityObj.outerHeight()
+        }).slideDown("fast");
+
+        $("body").bind("mousedown", onBodyDown);
+    }
+
+    function showMenuOfEdit() {
+        var cityObj = $("#editOrganizationName");
+        var cityOffset = $("#editOrganizationName").offset();
+        $("#menuContent").css({
+            left: cityOffset.left + "px",
+            top: cityOffset.top + cityObj.outerHeight()
+        }).slideDown("fast");
+
+        $("body").bind("mousedown", onBodyDown);
+    }
+
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+
+    function onBodyDown(event) {
+        if (!(event.target.id == "organizationName" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length > 0)) {
+            hideMenu();
+        }
+    }
+
+    $.fn.zTree.init($("#tree"), setting, zNodes);
+    $("#organizationName").click(showMenu);
+    $("#editOrganizationName").click(showMenuOfEdit);
+</script>
+</html>

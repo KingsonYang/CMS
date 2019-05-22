@@ -8,32 +8,5 @@
         <result column="score" jdbcType="DOUBLE" property="score" />
         <result column="credit" jdbcType="DOUBLE" property="credit" />
     </resultMap>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from score
-        where ID = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.cms.entity.Score">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into score (Stu_ID, Course_ID, score, credit)
-        values (#{stu_id,jdbcType=INTEGER}, #{course_id,jdbcType=INTEGER}, #{score,jdbcType=DOUBLE}, #{credit,jdbcType=DOUBLE})
-    </insert>
-    <update id="updateByPrimaryKey" parameterType="com.cms.entity.Score">
-        update score
-        set Stu_ID = #{stu_id,jdbcType=INTEGER},
-        Course_ID = #{course_id,jdbcType=INTEGER},
-        score = #{score,jdbcType=DOUBLE},
-        credir = #{credir,jdbcType=DOUBLE}
-        where ID = #{id,jdbcType=INTEGER}
-    </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select *
-        from score
-        where ID = #{id,jdbcType=INTEGER}
-    </select>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select *
-        from score
-    </select>
+
 </mapper>

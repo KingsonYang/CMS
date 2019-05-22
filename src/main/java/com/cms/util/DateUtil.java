@@ -33,8 +33,12 @@ public class DateUtil {
     }
 
     public static String transformCurrTime(Date date){
-        SimpleDateFormat sd = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd");
         return sd.format(date);
+    }
+
+    public static java.sql.Date transformTime(Date date){
+        return (java.sql.Date) date;
     }
 
 }

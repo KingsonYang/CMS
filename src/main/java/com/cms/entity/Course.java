@@ -1,92 +1,113 @@
 package com.cms.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
+
+@Table(name = "course")
 public class Course implements Serializable {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = CourseInfo.UserUpdateChecks.class)
     private Integer id;
     private Integer courseInfoId;
     private Integer teacherId;
     private Integer classId;
     private Integer classroomId;
     private Integer teachTime;
-    private Date beginDate;
-    private Date endDate;
+    private String beginDate;
+    private String endDate;
     private Integer seat;
 
     private static final long serialVersionUID = 1L;
+
+    public Course(){
+
+    }
 
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Course setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public Integer getCourseInfoId() {
         return courseInfoId;
     }
 
-    public void setCourseInfoId(Integer courseInfoId) {
+    public Course setCourseInfoId(Integer courseInfoId) {
         this.courseInfoId = courseInfoId;
+        return this;
     }
 
     public Integer getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(Integer teacherId) {
+    public Course setTeacherId(Integer teacherId) {
         this.teacherId = teacherId;
+        return this;
     }
 
     public Integer getClassId() {
         return classId;
     }
 
-    public void setClassId(Integer classId) {
+    public Course setClassId(Integer classId) {
         this.classId = classId;
+        return this;
     }
 
     public Integer getClassroomId() {
         return classroomId;
     }
 
-    public void setClassroomId(Integer classroomId) {
+    public Course setClassroomId(Integer classroomId) {
         this.classroomId = classroomId;
+        return this;
     }
 
     public Integer getTeachTime() {
         return teachTime;
     }
 
-    public void setTeachTime(Integer teachTime) {
+    public Course setTeachTime(Integer teachTime) {
         this.teachTime = teachTime;
+        return this;
     }
 
-    public Date getBeginDate() {
+    public String getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(Date beginDate) {
+    public Course setBeginDate(String beginDate) {
         this.beginDate = beginDate;
+        return this;
     }
 
-    public Date getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public Course setEndDate(String endDate) {
         this.endDate = endDate;
+        return this;
     }
 
     public Integer getSeat() {
         return seat;
     }
 
-    public void setSeat(Integer seat) {
+    public Course setSeat(Integer seat) {
         this.seat = seat;
+        return this;
     }
 
     @Override

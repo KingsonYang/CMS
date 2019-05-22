@@ -1,20 +1,10 @@
 package com.cms.dao;
 
 import com.cms.entity.Score;
+import com.cms.util.MyMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface ScoreMapper {
+public interface ScoreMapper extends MyMapper<Score>{
 
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Score score);
-
-    Score selectByPrimaryKey(Integer id);
-
-    List<Score> selectAll();
-
-    int updateByPrimaryKey(Score score);
 }

@@ -1,19 +1,11 @@
 package com.cms.dao;
 
 import com.cms.entity.Course;
+import com.cms.util.MyMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public interface CourseMapper {
+public interface CourseMapper extends MyMapper<Course>{
 
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Course record);
-
-    Course selectByPrimaryKey(Integer id);
-
-    List<Course> selectAll();
-
-    int updateByPrimaryKey(Course record);
 }

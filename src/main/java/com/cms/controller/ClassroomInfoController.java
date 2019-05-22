@@ -4,7 +4,6 @@ import com.cms.base.annotation.SystemLog;
 import com.cms.base.controller.BaseCrudController;
 import com.cms.entity.ClassroomInfo;
 import com.cms.service.ClassroomInfoService;
-import com.cms.util.MsgUtil;
 import com.cms.util.Result;
 import com.github.pagehelper.PageHelper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/classroom")

@@ -4,6 +4,7 @@ import com.cms.base.exception.BizException;
 import com.cms.base.service.IService;
 import com.cms.entity.User;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -29,6 +30,7 @@ public interface UserService extends IService<User>{
      * @param newPassword
      */
     void changePassword(Long userId, String newPassword);
+
 
     /**
      * 根据用户名查找其角色

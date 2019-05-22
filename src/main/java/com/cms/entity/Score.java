@@ -1,14 +1,26 @@
 package com.cms.entity;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+@Table(name = "score")
 public class Score implements Serializable {
 
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull(groups = User.UserUpdateChecks.class)
     private Integer id;
     private Integer stu_id;
     private Integer course_id;
     private Double score;
     private Double credit;
+
+    public Score(){
+
+    }
 
     private static final long serialVersionUID = 1L;
 
@@ -16,40 +28,47 @@ public class Score implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
+    public Score setId(Integer id) {
         this.id = id;
+        return this;
     }
 
     public Integer getStu_id() {
         return stu_id;
     }
 
-    public void setStu_id(Integer stu_id) {
+    public Score setStu_id(Integer stu_id) {
         this.stu_id = stu_id;
+        return this;
+
     }
 
     public Integer getCourse_id() {
         return course_id;
     }
 
-    public void setCourse_id(Integer course_id) {
+    public Score setCourse_id(Integer course_id) {
         this.course_id = course_id;
+        return this;
+
     }
 
     public Double getScore() {
         return score;
     }
 
-    public void setScore(Double score) {
+    public Score setScore(Double score) {
         this.score = score;
+        return this;
     }
 
     public Double getCredit() {
         return credit;
     }
 
-    public void setCredit(Double credit) {
+    public Score setCredit(Double credit) {
         this.credit = credit;
+        return this;
     }
 
     @Override
