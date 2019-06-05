@@ -1,10 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-111
-</body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<style>
+    ul.ztree {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        height: 200px;
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<section class="content-header" style="">
+    <h1>
+        信息维护
+        <small>信息维护页面</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+        <li><a href="#">信息维护</a></li>
+        <li class="active">个人信息</li>
+    </ol>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div id="toolbar">
+                        <!--<form class="form-inline" id="searchForm">-->
+                        <div class="form-group">
+                            <label class="control-label" for="id">编号 :</label>
+                            <input type="text" id="id" class="" minlength="6"
+                                   name="id" placeholder="编号" th:value="${user.id}" required readonly>
+                            <label class="control-label" for="username">姓名 :</label>
+                            <input type="text" id="username" class="" minlength="6"
+                                   name="username" placeholder="姓名" th:value="${user.username}" required readonly>
+                            <label class="control-label" for="sex">性别 :</label>
+                            <input type="text" id="sex" class="" minlength="6"
+                                   name="sex" placeholder="性别" th:value="${user.sex}" required>
+                            <label class="control-label" for="age">年龄 :</label>
+                            <input type="text" id="age" class="" minlength="6"
+                                   name="age" placeholder="年龄" th:value="${user.age}" required readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="phoneno">手机 :</label>
+                            <input type="text" id="phoneno" class="" minlength="6"
+                                   name="phoneno" placeholder="手机" th:value="${user.phoneno}" required>
+                            <label class="control-label" for="email">邮箱 :</label>
+                            <input type="text" id="email" class="" minlength="6"
+                                   name="email" placeholder="邮箱" th:value="${user.email}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="schoolName">学校 :</label>
+                            <input type="text" id="schoolName" class="" minlength="6"
+                                   name="schoolName" placeholder="学校" th:value="${classInfo.schoolName}" required>
+                            <label class="control-label" for="deptName">学院 :</label>
+                            <input type="text" id="deptName" class="" minlength="6"
+                                   name="deptName" placeholder="学院" th:value="${classInfo.deptName}" required>
+                            <label class="control-label" for="className">专业 :</label>
+                            <input type="text" id="className" class="" minlength="6"
+                                   name="className" placeholder="专业" th:value="${classInfo.className}" required>
+                            <label class="control-label" for="classShortname">班级 :</label>
+                            <input type="text" id="classShortname" class="" minlength="6"
+                                   name="classShortname" placeholder="班级" th:value="${classInfo.classShortname}" required>
+                        </div>
+
+                        <div class="btn-group">
+                            <!--<button type="button" class="btn btn-default btn-sm" id="changePwd">
+                                <i class="glyphicon glyphicon-search"></i>
+                                提交
+                            </button>-->
+                            <!--<button type="reset" class="btn btn-default btn-sm">
+                                <i class="glyphicon glyphicon-trash"></i>
+                                清空
+                            </button>-->
+                        </div>
+                        <!--</form>-->
+
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+<script th:inline="javascript">
+
+    $(function () {
+
+    });
+
+
+
+
+</script>
 </html>

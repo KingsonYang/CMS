@@ -1,12 +1,12 @@
 package com.cms.controller;
 
+import com.cms.base.annotation.SystemLog;
 import com.cms.base.controller.BaseCrudController;
 import com.cms.base.query.PageQuery;
-import com.cms.entity.Course;
-import com.cms.entity.Student;
-import com.cms.entity.User;
+import com.cms.entity.*;
 import com.cms.service.*;
 import com.cms.util.Result;
+import com.cms.vo.CourseVO;
 import com.cms.vo.ScheduleVO;
 import com.github.pagehelper.Page;
 import io.swagger.models.auth.In;
@@ -19,8 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by hs on 2019.5.18.
@@ -40,6 +42,12 @@ public class SecureController extends BaseCrudController<User> {
     private StudentService studentService;
 
     @Autowired
+    private ClassInfoService classInfoService;
+
+    @Autowired
+    private ClassroomInfoService classroomInfoService;
+
+    @Autowired
     private CourseInfoService courseInfoService;
 
     ScheduleVO scheduleVO1 = new ScheduleVO();
@@ -47,6 +55,7 @@ public class SecureController extends BaseCrudController<User> {
     ScheduleVO scheduleVO3 = new ScheduleVO();
     ScheduleVO scheduleVO4 = new ScheduleVO();
     ScheduleVO scheduleVO5 = new ScheduleVO();
+
 
     @GetMapping
     @RequiresPermissions("updatePwd:*")
@@ -57,10 +66,21 @@ public class SecureController extends BaseCrudController<User> {
     }
 
     @GetMapping
-    @RequiresPermissions("*:*")
+    @RequiresPermissions("userinfo:*")
     @RequestMapping("/userinfo")
-    public String userinfoPage() {
-
+    public String userinfoPage(Model model) {
+        String username = (String) SecurityUtils.getSubject().getPrincipal();
+        User user = userService.queryOne(new User().setUsername(username));
+        model.addAttribute("user",user);
+        ClassInfo classInfo = null;
+        Student student = studentService.queryOne(new Student().setStuId(user.getId()));
+        if(student == null){
+            classInfo = new ClassInfo(100,"xx","xx","xx","xx");
+            model.addAttribute("classInfo",classInfo);
+            return "system/userinfo";
+        }
+        classInfo = classInfoService.queryById(student.getClassId());
+        model.addAttribute("classInfo",classInfo);
         return "system/userinfo";
     }
 
@@ -165,4 +185,64 @@ public class SecureController extends BaseCrudController<User> {
         return Result.success();
 
     }
+
+
+    @GetMapping
+    @RequiresPermissions("chooseClass:*")
+    @RequestMapping("/chooseClass")
+    public String chooseClassPage(Model model) {
+
+        model.addAttribute("courseList", courseService.queryAll());
+        model.addAttribute("userList",userService.queryList(new User().setRoleIds("3")));
+        model.addAttribute("courseinfoList",courseInfoService.queryList(new CourseInfo().setAct(2)));
+        model.addAttribute("classroomList",classroomInfoService.queryAll());
+        model.addAttribute("classList",classInfoService.queryAll());
+        return "system/chooseClass";
+    }
+
+    @ResponseBody
+    @GetMapping("/chooseClass/list")
+    @RequiresPermissions("chooseClass:*")
+    public Result<List<CourseVO>> queryClassList(Course course, PageQuery pageQuery) {
+        Page<Course> page = (Page<Course>) courseService.queryList(course, pageQuery);
+        List<CourseVO> courseVOS = new ArrayList<>();
+        page.forEach(s -> {
+            CourseVO courseVO = new CourseVO(s);
+
+            CourseInfo courseInfo = courseInfoService.queryOne(new CourseInfo().setId(s.getCourseInfoId()));
+            if (courseInfo.getAct() == 2){
+                courseVO.setCoursename(courseInfoService.queryById(s.getCourseInfoId()).getName());
+                courseVO.setTeachername(userService.queryById(s.getTeacherId()).getUsername());
+                courseVO.setClassname(classInfoService.queryById(s.getClassId()).getClassShortname());
+                ClassroomInfo classroomInfo = classroomInfoService.queryById(s.getClassroomId());
+                courseVO.setClassroomname(classroomInfo.getFloorNo() + "号楼" + classroomInfo.getRoomNo());
+                courseVOS.add(courseVO);
+            }
+
+        });
+        return Result.success(courseVOS).addExtra("total", page.getTotal());
+    }
+
+
+    @ResponseBody
+    @RequiresPermissions("chooseClass:*")
+    @SystemLog("选择课程")
+    @PostMapping("/chooseOK")
+    public Result chooseClassOK(@NotNull @RequestParam("id") Object[] ids) {
+
+        for (Object id : ids){
+            String i = (String) id;
+            Course course = courseService.queryOne(new Course().setId(Integer.valueOf(i)));
+            String username = (String) SecurityUtils.getSubject().getPrincipal();
+            User user = userService.queryOne(new User().setUsername(username));
+            Student student = studentService.queryOne(new Student().setStuId(user.getId()));
+            if (student.getClassId() == course.getClassId()){
+                return Result.success();
+            }
+        }
+
+        return Result.success();
+    }
+
+
 }

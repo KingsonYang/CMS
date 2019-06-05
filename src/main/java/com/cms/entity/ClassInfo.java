@@ -1,6 +1,7 @@
 package com.cms.entity;
 
 import com.cms.entity.custom.BaseEntity;
+import io.swagger.models.auth.In;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,13 @@ public class ClassInfo implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    public ClassInfo(Integer id ,String schoolName, String deptName, String className, String classShortname) {
+        this.id = id;
+        this.schoolName = schoolName;
+        this.deptName = deptName;
+        this.className = className;
+        this.classShortname = classShortname;
+    }
 
     public Integer getId() {
         return id;

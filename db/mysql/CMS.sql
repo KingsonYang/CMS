@@ -27,12 +27,13 @@ CREATE TABLE `class_info` (
   `Class_Name` varchar(20) DEFAULT NULL,
   `Class_ShortName` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18002 DEFAULT CHARSET=utf8 COMMENT='班级信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=18003 DEFAULT CHARSET=utf8 COMMENT='班级信息表';
 
 /*Data for the table `class_info` */
 
 insert  into `class_info`(`ID`,`School_Name`,`Dept_Name`,`Class_Name`,`Class_ShortName`) values 
-(18001,'苏州科技大学','计算机科学与技术','网络管理（嵌入式）','18计网1');
+(18001,'苏州科技大学','计算机科学与技术','网络管理（嵌入式）','18计网1'),
+(18002,'苏州科技大学','计算机科学与技术','计算机应用','18计应1');
 
 /*Table structure for table `classroom_info` */
 
@@ -63,8 +64,8 @@ CREATE TABLE `course` (
   `Class_ID` int(11) DEFAULT NULL,
   `Classroom_ID` int(11) DEFAULT NULL,
   `Teach_Time` int(2) DEFAULT NULL COMMENT '上课时间（PS:周一上午12节课）',
-  `Begin_Date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '开课日期',
-  `End_Date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '结课日期',
+  `Begin_Date` varchar(100) DEFAULT NULL COMMENT '开课日期',
+  `End_Date` varchar(100) DEFAULT NULL COMMENT '结课日期',
   `seat` int(4) DEFAULT '0' COMMENT '已选座位',
   PRIMARY KEY (`ID`),
   KEY `授课教师` (`Teacher_ID`),
@@ -78,6 +79,17 @@ CREATE TABLE `course` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='课程表';
 
 /*Data for the table `course` */
+
+insert  into `course`(`ID`,`Course_Info_ID`,`Teacher_ID`,`Class_ID`,`Classroom_ID`,`Teach_Time`,`Begin_Date`,`End_Date`,`seat`) values 
+(1,1,180101,18001,1,14,'2019-05-19','2019-05-19',50),
+(2,1,180101,18002,1,13,'2019-05-19','2019-05-19',40),
+(3,2,180101,18001,1,11,'2019-05-19','2019-05-19',40),
+(4,3,180101,18001,2,21,'2019-05-19','2019-05-19',40),
+(5,4,180101,18002,2,12,'2019-05-19','2019-05-19',45),
+(6,4,180101,18001,1,31,'2019-05-19','2019-05-19',40),
+(7,5,180101,18001,2,41,'2019-05-19','2019-05-19',40),
+(8,10,180101,18001,2,51,'2019-05-19','2019-05-19',51),
+(9,23,180101,18002,2,61,'2019-06-06','2019-06-27',40);
 
 /*Table structure for table `course_info` */
 
@@ -136,7 +148,7 @@ CREATE TABLE `resource` (
   PRIMARY KEY (`id`),
   KEY `idx_sys_resource_parent_id` (`parent_id`),
   KEY `idx_sys_resource_parent_ids` (`parent_ids`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COMMENT='资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COMMENT='资源表';
 
 /*Data for the table `resource` */
 
@@ -163,6 +175,11 @@ insert  into `resource`(`id`,`name`,`type`,`url`,`parent_id`,`parent_ids`,`permi
 (33,'资源修改','BUTTON','',51,'0/1/51/','resource:update',1,'',NULL,0),
 (34,'资源删除','BUTTON','',51,'0/1/51/','resource:delete',1,NULL,NULL,0),
 (35,'资源查看','BUTTON','',51,'0/1/51/','resource:view',1,NULL,NULL,0),
+(36,'班级成员管理','MENU','#student',69,'0/1/','',1,'fa fa-user',9,0),
+(37,'班级成员新增','BUTTON','',36,'0/1/36','student:create',1,NULL,NULL,0),
+(38,'班级成员修改','BUTTON','',36,'0/1/36','student:update',1,'',NULL,0),
+(39,'班级成员删除','BUTTON','',36,'0/1/36','student:delete',1,NULL,NULL,0),
+(40,'班级成员查看','BUTTON','',36,'0/1/36','student:view',1,NULL,NULL,0),
 (41,'角色管理','MENU','#role',21,'0/1/','role:*',1,'fa fa-child',2,1),
 (42,'角色新增','BUTTON','',41,'0/1/41/','role:create',1,NULL,NULL,0),
 (43,'角色修改','BUTTON','',41,'0/1/41/','role:update',1,NULL,NULL,0),
@@ -171,17 +188,25 @@ insert  into `resource`(`id`,`name`,`type`,`url`,`parent_id`,`parent_ids`,`permi
 (46,'系统用户','MENU','#user',21,'0/1/11/','user:*',1,'fa fa-wrench',1,1),
 (51,'资源管理','MENU','#resource',31,'0/1/','resource:*',1,'fa fa-cubes',NULL,1),
 (52,'网上选课','MENU','#',1,'0/1/','chooseClass:*',1,'fa fa-sitemap',5,0),
-(53,'校选修课','MENU','#4',52,'0/1/52',NULL,1,'fa fa-user',NULL,0),
-(54,'选体育课','MENU','#5',52,'0/1/52',NULL,1,'fa fa-user',NULL,0),
+(53,'校选修课','MENU','#chooseClass',52,'0/1/52','chooseClass:*',1,'fa fa-user',NULL,0),
+(54,'选体育课','MENU','#',52,'0/1/52',NULL,1,'fa fa-user',NULL,0),
 (69,'系统管理','MENU','#',1,'0/1/','system:*',1,'fa fa-wrench',4,0),
 (70,'系统日志','MENU','#log',69,'0/1/69/','log:*',1,'fa fa-history',NULL,1),
 (73,'信息维护','MENU','#',1,'0/1/','secure:*',1,'fa fa-sitemap',8,0),
-(74,'个人信息','MENU','#userinfo',73,'0/1/73/','',1,'fa fa-user',NULL,0),
-(75,'修改密码','MENU','#updatePwd',73,'0/1/73/',NULL,1,'fa fa-user',NULL,0),
+(74,'个人信息','MENU','#userinfo',73,'0/1/73/','userinfo:*',1,'fa fa-user',NULL,0),
+(75,'修改密码','MENU','#updatePwd',73,'0/1/73/','updatePwd:*',1,'fa fa-user',NULL,0),
 (78,'信息查询','MENU','#',1,'0/1/','information:*',1,'fa fa-user',9,0),
-(79,'专业推荐课表查询','MENU','#1',78,'0/1/78/',NULL,1,'fa fa-user',NULL,0),
-(80,'个人课表查询','MENU','#2',78,'0/1/78/',NULL,1,'fa fa-user',NULL,0),
-(82,'成绩查询','MENU','#3',78,'0/1/78/',NULL,1,'fa fa-user',NULL,0);
+(80,'个人课表查询','MENU','#schedule',78,'0/1/78/','schedule:*',1,'fa fa-user',NULL,0),
+(82,'成绩管理','MENU','#score',78,'0/1/78/','',1,'fa fa-user',NULL,0),
+(83,'成绩新增','BUTTON','',82,'0/1/78/82/','score:create',1,NULL,NULL,0),
+(84,'成绩修改','BUTTON','',82,'0/1/78/82/','score:update',1,'',NULL,0),
+(85,'成绩删除','BUTTON','',82,'0/1/78/82/','score:delete',1,NULL,NULL,0),
+(86,'成绩查看','BUTTON','',82,'0/1/78/82/','score:view',1,NULL,NULL,0),
+(87,'课程表管理','MENU','#course',69,'0/1/','course:*',1,'fa fa-sitemap',10,0),
+(88,'课程表新增','BUTTON','',87,'0/1/88/','course:create',1,NULL,NULL,0),
+(89,'课程表修改','BUTTON','',87,'0/1/88/','course:update',1,'',NULL,0),
+(90,'课程表删除','BUTTON','',87,'0/1/88/','course:delete',1,NULL,NULL,0),
+(91,'课程表查看','BUTTON','',87,'0/1/88/','course:view',1,NULL,NULL,0);
 
 /*Table structure for table `role` */
 
@@ -194,15 +219,15 @@ CREATE TABLE `role` (
   `Resource_ids` varchar(100) DEFAULT NULL COMMENT '资源序号',
   `available` tinyint(1) DEFAULT NULL COMMENT '是否有效',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `role` */
 
 insert  into `role`(`ID`,`Role`,`Description`,`Resource_ids`,`available`) values 
 (1,'spuer_admin','超级管理员','1,11,21,31,41,46,51,69,73,88',0),
-(2,'admin','管理员','11,12,13,14,15,16,21,22,31,41,46,52,69,73,78',0),
-(3,'teacher','教职工','15,69,73,88',NULL),
-(4,'student','学生','11,15,52,73,78',NULL),
+(2,'admin','管理员','11,12,13,14,15,16,21,22,31,36,37,38,39,40,41,46,52,69,73,74,75,78,82,83,84,85,86,87',0),
+(3,'teacher','教职工','15,20,26,46,52,69,73,74,75,78,79,80,83,84,85,86,88,91',NULL),
+(4,'student','学生','15,20,26,52,73,74,75,78,79,80,86,91',NULL),
 (5,'tourist','游客','11',NULL);
 
 /*Table structure for table `score` */
@@ -218,11 +243,15 @@ CREATE TABLE `score` (
   PRIMARY KEY (`id`),
   KEY `stu_score` (`Stu_ID`),
   KEY `course_link` (`Course_ID`),
-  CONSTRAINT `course_link` FOREIGN KEY (`Course_ID`) REFERENCES `course` (`ID`),
+  CONSTRAINT `course_link` FOREIGN KEY (`Course_ID`) REFERENCES `course_info` (`ID`),
   CONSTRAINT `stu_score` FOREIGN KEY (`Stu_ID`) REFERENCES `student` (`Stu_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `score` */
+
+insert  into `score`(`id`,`Stu_ID`,`Course_ID`,`score`,`credit`) values 
+(1,20180101,1,90.00,5.0),
+(2,20180102,1,59.00,0.0);
 
 /*Table structure for table `student` */
 
@@ -240,6 +269,11 @@ CREATE TABLE `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生表';
 
 /*Data for the table `student` */
+
+insert  into `student`(`ID`,`Stu_ID`,`Class_ID`) values 
+(1,20180101,18001),
+(2,20180104,18002),
+(3,20180102,18001);
 
 /*Table structure for table `user` */
 
@@ -268,8 +302,9 @@ insert  into `user`(`ID`,`username`,`Name`,`Password`,`salt`,`Sex`,`Age`,`PhoneN
 (100001,'admin','admin','d3c59d25033dbf980d29554025c23a75','8d78869f470951332959580424d4bf4f','男',18,'15151936139','1311399510@qq.com','2','2018/12/28 16:47','2019-01-29 19:47:55'),
 (180101,'杨庆升','杨庆升','3254baadc5b1f03aab73e19bffcafe89','76ad8072f76b82004fd40bc67b9707e6','男',22,'15151936139','1311399510@qq.com','3',NULL,NULL),
 (20180101,'乔璐','乔璐','b29c65d3cdff825f3d91f20d7feee633','d9301939f7a91a4afa8e633b7b26b81d','女',18,'19122984791','1311399510@qq.com','4',NULL,NULL),
-(20180104,'张天昊','张天昊','f5bb0c8de146c67b44babbf4e6584cc0',NULL,'男',22,'15151937162','1311399510@qq.com','5',NULL,NULL),
-(20180107,'莫尚义','莫尚义','ce62ad7f26c20c7d45264a87decd43e6','88ded3e49e2c72fdd05e46e2a26c221a','男',24,'13676761126','1311399510@qq.com','2,4',NULL,NULL);
+(20180102,'乔煜','乔煜','040d676db610b42204aebae90638e038','bcb793bf2545a3a8a7296b8791c57971','男',15,'123123123123','1311399510@qq.com','4',NULL,NULL),
+(20180104,'张天昊','张天昊','f5bb0c8de146c67b44babbf4e6584cc0',NULL,'男',22,'15151937162','1311399510@qq.com','4',NULL,NULL),
+(20180107,'莫尚义','莫尚义','dbe8514a6acf92bc249ca958ce3393ec','3094abce1e044a1c1aba5af9f9704f91','男',24,'13676761126','1311399510@qq.com','2,4',NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
